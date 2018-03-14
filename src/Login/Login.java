@@ -109,11 +109,7 @@ public final class Login extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnsubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 110, 40));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\Pictures\\Wallpapers\\man (1).png")); // NOI18N
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, 30));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("E:\\Pictures\\Wallpapers\\lock.png")); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, 30));
 
         radioAdmin.setBackground(new java.awt.Color(0, 204, 153));
@@ -137,6 +133,9 @@ public final class Login extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 120, 230));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 360));
+
+        setSize(new java.awt.Dimension(725, 398));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed

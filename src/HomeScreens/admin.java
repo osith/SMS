@@ -23,7 +23,9 @@ import java.util.logging.Logger;
  * @author MalindaRaneshDeshapr
  */
 public class admin extends javax.swing.JFrame {
+
     String user;
+
     /**
      * Creates new form admin
      */
@@ -37,13 +39,12 @@ public class admin extends javax.swing.JFrame {
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xsize = (int) tk.getScreenSize().getWidth();
         int ysize = (int) tk.getScreenSize().getHeight();
-        this.setSize(xsize,ysize);
-        
-        if(!user.equals("admin")){
+        this.setSize(xsize, ysize);
+
+        if (!user.equals("admin")) {
             pnl_userAccounts.hide();
         }
-        
-        
+
     }
 
     private admin() {
@@ -555,7 +556,7 @@ public class admin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        
+
     }//GEN-LAST:event_formWindowClosed
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
@@ -565,7 +566,7 @@ public class admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel16MouseClicked
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-       this.setState(this.ICONIFIED);
+        this.setState(this.ICONIFIED);
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void pnl_detailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_detailsMousePressed
@@ -581,12 +582,12 @@ public class admin extends javax.swing.JFrame {
         try {
             n1 = new adminattendance(user);
             deskpanal.removeAll();
-        deskpanal.updateUI();
-        deskpanal.add(n1).setVisible(true);
+            deskpanal.updateUI();
+            deskpanal.add(n1).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_pnl_attendanceMouseClicked
 
     private void pnl_attendanceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_attendanceMousePressed
@@ -619,7 +620,7 @@ public class admin extends javax.swing.JFrame {
         resetColour(pnl_details);
         resetColour(pnl_attendance);
         resetColour(pnl_performace);
-        
+
     }//GEN-LAST:event_pnl_leadershipMousePressed
 
     private void pnl_leadership1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadership1MousePressed
@@ -631,17 +632,17 @@ public class admin extends javax.swing.JFrame {
     }//GEN-LAST:event_pnl_leadership1MousePressed
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
-        
+
     }//GEN-LAST:event_jLabel12MousePressed
 
     private void pnl_detailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_detailsMouseClicked
-        AdminPersonalDetails n1  = new AdminPersonalDetails(user);
+        AdminPersonalDetails n1 = new AdminPersonalDetails(user);
         deskpanal.removeAll();
         deskpanal.updateUI();
         deskpanal.add(n1).setVisible(true);
-        
+
         n1.setFrameIcon(null);
-        
+
     }//GEN-LAST:event_pnl_detailsMouseClicked
 
     private void pnl_performaceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_performaceMouseClicked
@@ -649,36 +650,34 @@ public class admin extends javax.swing.JFrame {
         try {
             n1 = new adminexamprof(user);
             deskpanal.removeAll();
-        deskpanal.updateUI();
-        deskpanal.add(n1).setVisible(true);
+            deskpanal.updateUI();
+            deskpanal.add(n1).setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       
-        
-        
+
+
     }//GEN-LAST:event_pnl_performaceMouseClicked
 
     private void pnl_otherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_otherMouseClicked
-        adminotherprof n1  = new adminotherprof();
+        adminotherprof n1 = new adminotherprof();
         deskpanal.removeAll();
         deskpanal.updateUI();
         deskpanal.add(n1).setVisible(true);
     }//GEN-LAST:event_pnl_otherMouseClicked
 
     private void pnl_leadershipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadershipMouseClicked
-        adminleadership n1  = new adminleadership();
-        deskpanal.removeAll();
-        deskpanal.updateUI();
-        deskpanal.add(n1).setVisible(true);
+//        adminleadership n1  = new adminleadership();
+//        deskpanal.removeAll();
+//        deskpanal.updateUI();
+//        deskpanal.add(n1).setVisible(true);
     }//GEN-LAST:event_pnl_leadershipMouseClicked
 
     private void pnl_leadership1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadership1MouseClicked
-       adminteacherdetails n1  = new adminteacherdetails();
-        deskpanal.removeAll();
-        deskpanal.updateUI();
-        deskpanal.add(n1).setVisible(true);
+//        adminteacherdetails n1 = new adminteacherdetails();
+//        deskpanal.removeAll();
+//        deskpanal.updateUI();
+//        deskpanal.add(n1).setVisible(true);
     }//GEN-LAST:event_pnl_leadership1MouseClicked
 
     private void jLabel18MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MousePressed
@@ -695,19 +694,19 @@ public class admin extends javax.swing.JFrame {
         resetColour(pnl_details);
         resetColour(pnl_attendance);
         resetColour(pnl_performace);
-        
+
         adminclassdetails n1;
         try {
             n1 = new adminclassdetails();
             deskpanal.removeAll();
-        deskpanal.updateUI();
-        deskpanal.add(n1).setVisible(true);
+            deskpanal.updateUI();
+            deskpanal.add(n1).setVisible(true);
         } catch (SQLException ex) {
             System.out.println("Malinda");
             //1Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
+
     }//GEN-LAST:event_pnl_classdetailsMousePressed
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
@@ -724,7 +723,7 @@ public class admin extends javax.swing.JFrame {
         resetColour(pnl_details);
         resetColour(pnl_attendance);
         resetColour(pnl_performace);
-        
+
         adminUserAccounts usera;
         try {
             usera = new adminUserAccounts();
@@ -734,22 +733,22 @@ public class admin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_pnl_userAccountsMouseClicked
 
     private void pnl_userAccountsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_userAccountsMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_pnl_userAccountsMousePressed
 
-    void setColour(JPanel pane1){
-        pane1.setBackground(new Color(0,220,153));
+    void setColour(JPanel pane1) {
+        pane1.setBackground(new Color(0, 220, 153));
     }
-    
-    void resetColour(JPanel pane1){
-        pane1.setBackground(new Color(0,204,153));
+
+    void resetColour(JPanel pane1) {
+        pane1.setBackground(new Color(0, 204, 153));
     }
+
     /**
      * @param args the command line arguments
      */

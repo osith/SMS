@@ -6,18 +6,12 @@
 package admin;
 
 import DatabaseConnection.DbConnect;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import net.proteanit.sql.DbUtils;
 
 /**

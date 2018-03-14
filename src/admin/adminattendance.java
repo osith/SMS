@@ -7,27 +7,20 @@ package admin;
 
 import DatabaseConnection.DbConnect;
 import java.awt.BorderLayout;
-import static java.lang.Math.round;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import net.proteanit.sql.DbUtils;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 /**
@@ -104,7 +97,6 @@ public class adminattendance extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        pieChart2DProperties1 = new org.jCharts.properties.PieChart2DProperties();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -1517,7 +1509,6 @@ public class adminattendance extends javax.swing.JInternalFrame {
     private javax.swing.JTextField per_regdate;
     private javax.swing.JTextField per_regdate1;
     private javax.swing.JTextField per_txtabsnt;
-    private org.jCharts.properties.PieChart2DProperties pieChart2DProperties1;
     private javax.swing.JTable table_studentlist;
     private javax.swing.JPanel tablepanal;
     private javax.swing.JPanel tablepanal1;
