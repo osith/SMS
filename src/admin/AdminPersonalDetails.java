@@ -30,8 +30,8 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 /**
- *
- * @author MalindaRaneshDeshapr
+ * This is AdminPersonalDetails class (Student)
+ * @author S.D. Sugathapala
  */
 public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
@@ -40,7 +40,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     PreparedStatement pst;
     studentpersonaldetails p1 = new studentpersonaldetails();
 
-    int indexno;
+    int indexNum;
     String fullname;
     String nwi;
     Date birthday;
@@ -57,28 +57,34 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     
     String user;
 
+    /**
+     * AdminPersonalDetails constructor
+     * @param user user role
+     */
     public AdminPersonalDetails(String user) {
+        
+        //Database connection
         conn = DbConnect.ConnectDb();
+        
+        //Current user
         this.user = user;
+        
         initComponents();
         setRootPaneCheckingEnabled(false);
         
-        if(!user.equals("admin")){
-            btn_update.setEnabled(false);
-            jTabbedPane1.disable();
-        
-        
-        }
-
-        /*LocalDateTime time = LocalDateTime.now();
-        String time1 = time.toString();*/
         Date date = new Date();
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
+        
+        //if logged user is not admin update is disabled
+        if(!user.equals("admin")){
+            btnUpdate.setEnabled(false);
+            tab_studentRecord.disable();
+        }
 
+        //Load details of teachers class
         String sql1 = "SELECT  class_grade,class_subclass,class_year FROM classes WHERE class_year=? GROUP BY class_grade ";
-
         try {
             pst = conn.prepareStatement(sql1);
             pst.setInt(1, year);
@@ -86,14 +92,10 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
             while (rs.next()) {
                 combo_grade.addItem(rs.getString("class_grade"));
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        //setFrameIcon(null);
-        //setBorder(null);
     }
 
     /**
@@ -106,74 +108,74 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tab_studentRecord = new javax.swing.JTabbedPane();
         view = new javax.swing.JPanel();
         PDPanal1 = new javax.swing.JPanel();
         txt_address = new javax.swing.JTextField();
-        txt_index = new javax.swing.JTextField();
+        txt_indexNum = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        txt_name_initial = new javax.swing.JTextField();
+        txt_nameWithInitial = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txt_siblings = new javax.swing.JTextArea();
-        txt_full_name = new javax.swing.JTextField();
+        txt_siblingDetails = new javax.swing.JTextArea();
+        txt_fullName = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
+        lblStudentDetails = new javax.swing.JLabel();
         txt_birthday = new com.toedter.calendar.JDateChooser();
         ParentDPanal1 = new javax.swing.JPanel();
-        txt_mother_name = new javax.swing.JTextField();
+        txt_motherName = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        txt_mother_occupation = new javax.swing.JTextField();
-        txt_father_name = new javax.swing.JTextField();
+        txt_motherOccupation = new javax.swing.JTextField();
+        txt_fatherName = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        txt_father_occupation = new javax.swing.JTextField();
+        txt_fatherOccupation = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         CDPanal1 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
-        txt_father_mobile = new javax.swing.JTextField();
+        txt_fatherContactNum = new javax.swing.JTextField();
         jLabel34 = new javax.swing.JLabel();
         txt_mother_mobile = new javax.swing.JTextField();
         jLabel35 = new javax.swing.JLabel();
-        txt_home = new javax.swing.JTextField();
+        txt_homeContactNum = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         RDPanal1 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        Class_reg = new javax.swing.JTextField();
-        txt_regdate = new com.toedter.calendar.JDateChooser();
+        txt_regClass = new javax.swing.JTextField();
+        txt_regDate = new com.toedter.calendar.JDateChooser();
         jLabel40 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         txt_search = new javax.swing.JTextField();
-        btn_search = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_students = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        btn_update = new javax.swing.JButton();
+        btnExportReport = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
         insert = new javax.swing.JPanel();
         PDPanal = new javax.swing.JPanel();
-        txt_add = new javax.swing.JTextField();
+        txt_studentAddress = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtarea_sib = new javax.swing.JTextArea();
-        txt_sib = new javax.swing.JTextField();
+        txt_siblingIndexNum = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnInsertSiblings = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         txt_fullname = new javax.swing.JTextField();
         txt_nameInitial = new javax.swing.JTextField();
-        txt_datechooser = new com.toedter.calendar.JDateChooser();
+        txt_dob = new com.toedter.calendar.JDateChooser();
         ParentDPanal = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -199,7 +201,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         jLabel16 = new javax.swing.JLabel();
         homenum = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnInsertStudent = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(206, 255, 179));
         setBorder(null);
@@ -209,11 +211,11 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         setFocusCycleRoot(false);
         setOpaque(true);
 
-        jTabbedPane1.setBackground(new java.awt.Color(206, 255, 179));
-        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
-        jTabbedPane1.setToolTipText("");
-        jTabbedPane1.setDoubleBuffered(true);
-        jTabbedPane1.setOpaque(true);
+        tab_studentRecord.setBackground(new java.awt.Color(206, 255, 179));
+        tab_studentRecord.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        tab_studentRecord.setToolTipText("");
+        tab_studentRecord.setDoubleBuffered(true);
+        tab_studentRecord.setOpaque(true);
 
         view.setBackground(new java.awt.Color(206, 255, 179));
 
@@ -228,16 +230,16 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
         jLabel24.setText("Full Name with Initial :");
 
-        txt_siblings.setColumns(20);
-        txt_siblings.setRows(5);
-        jScrollPane2.setViewportView(txt_siblings);
+        txt_siblingDetails.setColumns(20);
+        txt_siblingDetails.setRows(5);
+        jScrollPane2.setViewportView(txt_siblingDetails);
 
         jLabel26.setText("Siblings Details :");
 
         jLabel27.setText("Address :");
 
-        jLabel28.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel28.setText("Personal Details");
+        lblStudentDetails.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblStudentDetails.setText("Student Details");
 
         javax.swing.GroupLayout PDPanal1Layout = new javax.swing.GroupLayout(PDPanal1);
         PDPanal1.setLayout(PDPanal1Layout);
@@ -247,7 +249,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26)
-                    .addComponent(jLabel28)
+                    .addComponent(lblStudentDetails)
                     .addGroup(PDPanal1Layout.createSequentialGroup()
                         .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
@@ -257,9 +259,9 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                             .addComponent(jLabel27))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_index, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_full_name, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_name_initial, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_indexNum, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_fullName, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_nameWithInitial, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txt_birthday, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -270,20 +272,20 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
             PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PDPanal1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel28)
+                .addComponent(lblStudentDetails)
                 .addGap(16, 16, 16)
                 .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PDPanal1Layout.createSequentialGroup()
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_full_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_fullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel21))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel24)
-                            .addComponent(txt_name_initial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txt_index, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_nameWithInitial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_indexNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PDPanal1Layout.createSequentialGroup()
@@ -324,20 +326,20 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     .addGroup(ParentDPanal1Layout.createSequentialGroup()
                         .addComponent(jLabel29)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_mother_occupation, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_motherOccupation, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel32)
                     .addGroup(ParentDPanal1Layout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addGap(31, 31, 31)
-                        .addComponent(txt_mother_name, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_motherName, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(ParentDPanal1Layout.createSequentialGroup()
                         .addGroup(ParentDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel31)
                             .addComponent(jLabel30))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(ParentDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_father_name, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_father_occupation, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_fatherName, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_fatherOccupation, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ParentDPanal1Layout.setVerticalGroup(
@@ -348,19 +350,19 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(ParentDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(txt_mother_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_motherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ParentDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(txt_mother_occupation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_motherOccupation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ParentDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(txt_father_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_fatherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(ParentDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel31)
-                    .addComponent(txt_father_occupation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_fatherOccupation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
@@ -368,6 +370,12 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         CDPanal1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel33.setText("Father's Mobile :");
+
+        txt_fatherContactNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_fatherContactNumActionPerformed(evt);
+            }
+        });
 
         jLabel34.setText("Mother's Mobile :");
 
@@ -391,7 +399,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                         .addGap(276, 276, 276)
                         .addComponent(jLabel35)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_home, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_homeContactNum, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(CDPanal1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel36)))
@@ -401,7 +409,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     .addContainerGap()
                     .addComponent(jLabel33)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(txt_father_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_fatherContactNum, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(256, Short.MAX_VALUE)))
         );
         CDPanal1Layout.setVerticalGroup(
@@ -412,7 +420,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(CDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
-                    .addComponent(txt_home, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_homeContactNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(CDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
@@ -423,7 +431,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     .addGap(40, 40, 40)
                     .addGroup(CDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel33)
-                        .addComponent(txt_father_mobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_fatherContactNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(55, Short.MAX_VALUE)))
         );
 
@@ -448,11 +456,11 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     .addGroup(RDPanal1Layout.createSequentialGroup()
                         .addComponent(jLabel38)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Class_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_regClass, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(RDPanal1Layout.createSequentialGroup()
                         .addComponent(jLabel37)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_regdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(txt_regDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
         RDPanal1Layout.setVerticalGroup(
@@ -463,11 +471,11 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(RDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel37)
-                    .addComponent(txt_regdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_regDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addGroup(RDPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Class_reg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_regClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -482,10 +490,10 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Contact No");
 
-        btn_search.setText("Search");
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -507,17 +515,17 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         });
         jScrollPane3.setViewportView(tbl_students);
 
-        jButton4.setText("Export Report");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnExportReport.setText("Export Report");
+        btnExportReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnExportReportActionPerformed(evt);
             }
         });
 
-        btn_update.setText("Update");
-        btn_update.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_updateActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
 
@@ -534,7 +542,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                             .addGroup(viewLayout.createSequentialGroup()
                                 .addComponent(RDPanal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
-                                .addComponent(btn_update)))
+                                .addComponent(btnUpdate)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CDPanal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -554,9 +562,9 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                                     .addComponent(txt_search)))
                             .addGroup(viewLayout.createSequentialGroup()
                                 .addGap(81, 81, 81)
-                                .addComponent(btn_search)
+                                .addComponent(btnSearch)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4)))
+                                .addComponent(btnExportReport)))
                         .addGap(56, 56, 56)
                         .addComponent(jScrollPane3)))
                 .addContainerGap(83, Short.MAX_VALUE))
@@ -576,8 +584,8 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                         .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_search)
-                            .addComponent(jButton4)))
+                            .addComponent(btnSearch)
+                            .addComponent(btnExportReport)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(26, 26, 26)
                 .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -586,7 +594,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(RDPanal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_update))
+                            .addComponent(btnUpdate))
                         .addGap(42, 42, 42))
                     .addGroup(viewLayout.createSequentialGroup()
                         .addComponent(ParentDPanal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -595,7 +603,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jTabbedPane1.addTab("View Personal Details", view);
+        tab_studentRecord.addTab("View Personal Details", view);
 
         insert.setBackground(new java.awt.Color(206, 255, 179));
         insert.setPreferredSize(new java.awt.Dimension(1500, 600));
@@ -617,17 +625,17 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Siblings Details :");
 
-        jButton1.setText("Insert");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnInsertSiblings.setText("Insert");
+        btnInsertSiblings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnInsertSiblingsActionPerformed(evt);
             }
         });
 
         jLabel5.setText("Address :");
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel17.setText("Personal Details");
+        jLabel17.setText("Student Details");
 
         javax.swing.GroupLayout PDPanalLayout = new javax.swing.GroupLayout(PDPanal);
         PDPanal.setLayout(PDPanalLayout);
@@ -646,17 +654,17 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PDPanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_add, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                            .addComponent(txt_studentAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                             .addGroup(PDPanalLayout.createSequentialGroup()
-                                .addComponent(txt_sib, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_siblingIndexNum, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14)
                                 .addGap(24, 24, 24)
-                                .addComponent(jButton1))
+                                .addComponent(btnInsertSiblings))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_fullname, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                             .addComponent(txt_nameInitial, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                            .addComponent(txt_datechooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txt_dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
         PDPanalLayout.setVerticalGroup(
@@ -678,17 +686,17 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                         .addComponent(jLabel4)
                         .addGap(12, 12, 12)
                         .addGroup(PDPanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_studentAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(PDPanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(txt_sib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_siblingIndexNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel14)
-                            .addComponent(jButton1))
+                            .addComponent(btnInsertSiblings))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_datechooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -891,10 +899,10 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     .addContainerGap(55, Short.MAX_VALUE)))
         );
 
-        jButton2.setText("Insert");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnInsertStudent.setText("Insert");
+        btnInsertStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnInsertStudentActionPerformed(evt);
             }
         });
 
@@ -908,14 +916,14 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     .addGroup(insertLayout.createSequentialGroup()
                         .addComponent(RDPanal, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(104, 104, 104)
-                        .addComponent(jButton2))
+                        .addComponent(btnInsertStudent))
                     .addGroup(insertLayout.createSequentialGroup()
                         .addComponent(PDPanal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addGroup(insertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CDPanal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(ParentDPanal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         insertLayout.setVerticalGroup(
             insertLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -931,7 +939,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                                 .addGap(74, 74, 74))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, insertLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
+                                .addComponent(btnInsertStudent)
                                 .addGap(84, 84, 84))))
                     .addGroup(insertLayout.createSequentialGroup()
                         .addComponent(ParentDPanal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -940,112 +948,131 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                         .addGap(0, 198, Short.MAX_VALUE))))
         );
 
-        jTabbedPane1.addTab("Insert New Record", insert);
+        tab_studentRecord.addTab("Insert New Record", insert);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1141, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(tab_studentRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 1141, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tab_studentRecord)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+    /**
+     * btnSearch click event
+     * @param evt mouse click event
+     */
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        String userinp = txt_search.getText();
-        int useri = Integer.parseInt(userinp);
-        String sql1 = "SELECT AdNo,FullName,NameWithInitial,Birthday,Address,reg_date FROM student_personal_details WHERE AdNo=?";
+        String searchData = txt_search.getText();
+        int searchDataInt = Integer.parseInt(searchData);
+
+        //Search student details by index number
+        String sql1 = "SELECT AdNo,FullName,NameWithInitial,Birthday,Address,reg_date FROM student_personal_details WHERE AdNo=?"; 
         try {
             pst = conn.prepareStatement(sql1);
-            pst.setInt(1, useri);
+            pst.setInt(1, searchDataInt);
             rs = pst.executeQuery();
 
         } catch (Exception e) {
             System.out.println(e);
         }
+        
         tbl_students.setModel(DbUtils.resultSetToTableModel(rs));
-    }//GEN-LAST:event_btn_searchActionPerformed
+    }//GEN-LAST:event_btnSearchActionPerformed
 
+    /**
+     * tbl_student click event
+     * @param evt mouse click event
+     */
     private void tbl_studentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_studentsMouseClicked
-        txt_siblings.setText("");
-        String userinp = txt_search.getText();
-        int useri = Integer.parseInt(userinp);
+        txt_siblingDetails.setText("");
+        String searchData = txt_search.getText();
+        int searchDataInt = Integer.parseInt(searchData);
         int rr = tbl_students.getSelectedRow();
+        
         String AdNo = tbl_students.getValueAt(rr, 0).toString();
         String FullName = tbl_students.getValueAt(rr, 1).toString();
         String NameWI = tbl_students.getValueAt(rr, 2).toString();
         String Birthday = tbl_students.getValueAt(rr, 3).toString();
         String Address = tbl_students.getValueAt(rr, 4).toString();
         String regdate1 = tbl_students.getValueAt(rr, 5).toString();
+        
         java.util.Date date;
         java.util.Date reg;
+        
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(Birthday);
             txt_birthday.setDate(date);
 
             reg = new SimpleDateFormat("dd/MM/yyyy").parse(regdate1);
-            txt_regdate.setDate(reg);
+            txt_regDate.setDate(reg);
         } catch (ParseException ex) {
             Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        txt_index.setText(AdNo);
-        txt_full_name.setText(FullName);
-        txt_name_initial.setText(NameWI);
+        txt_indexNum.setText(AdNo);
+        txt_fullName.setText(FullName);
+        txt_nameWithInitial.setText(NameWI);
         txt_address.setText(Address);
 
-        //parentdetails
+        //Parent details
         int ad = Integer.parseInt(AdNo);
+        
+        //Search parent details
         String sql2 = "SELECT std_ad_no,std_mother_name,std_mother_occupation,std_father_name,srd_father_occupation FROM student_parent_details WHERE std_ad_no=?";
         try {
             pst = conn.prepareStatement(sql2);
             pst.setInt(1, ad);
             rs = pst.executeQuery();
+            
             if (rs.next()) {
                 String mothername = rs.getString("std_mother_name");
                 String motheroc = rs.getString("std_mother_occupation");
                 String fathername = rs.getString("std_father_name");
                 String father0c = rs.getString("srd_father_occupation");
 
-                //display
-                txt_mother_name.setText(mothername);
-                txt_mother_occupation.setText(motheroc);
-                txt_father_name.setText(fathername);
-                txt_father_occupation.setText(father0c);
+                //Display parent details
+                txt_motherName.setText(mothername);
+                txt_motherOccupation.setText(motheroc);
+                txt_fatherName.setText(fathername);
+                txt_fatherOccupation.setText(father0c);
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        //contactDetails
+        //Search parent contact details
         String sql3 = "Select std_ad_no,std_home,std_father_mobile,std_mother_mobile From student_contact_details where std_ad_no=?";
         try {
             pst = conn.prepareStatement(sql3);
             pst.setInt(1, ad);
             rs = pst.executeQuery();
+            
             if (rs.next()) {
                 String home = rs.getString("std_home");
                 String father = rs.getString("std_father_mobile");
                 String mother = rs.getString("std_mother_mobile");
 
-                txt_father_mobile.setText(father);
+                //Display parent contact details
+                txt_fatherContactNum.setText(father);
                 txt_mother_mobile.setText(mother);
-                txt_home.setText(home);
+                txt_homeContactNum.setText(home);
             }
         } catch (Exception e) {
             System.out.println(e);
-
         }
 
+        //Search class details
         String sql6 = "SELECT C.class_grade, C.class_subclass, min(S.std_adno) FROM student_class S, classes C WHERE S.std_adno=?";
         try {
             pst = conn.prepareStatement(sql6);
-            pst.setInt(1, useri);
+            pst.setInt(1, searchDataInt);
             rs = pst.executeQuery();
 
             if (rs.next()) {
@@ -1056,13 +1083,16 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 buffer.append(grade).append(" ").append(sub);
                 String newclass = buffer.toString();
 
-                Class_reg.setText(newclass);
+                //Display class details
+                txt_regClass.setText(newclass);
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        int id = Integer.parseInt(txt_index.getText());
+        int id = Integer.parseInt(txt_indexNum.getText());
+        
+        //Search Siblings
         String searchsib = "SELECT std_ad_no, std_sib_ad FROM student_siblings_details WHERE std_ad_no=?";
         try {
             pst = conn.prepareStatement(searchsib);
@@ -1071,14 +1101,18 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
             while (rs.next()) {
                 int sibID = rs.getInt("std_sib_ad");
+                
+                //Search sibling index num, name
                 String sibdetails = "SELECT AdNo, FullName FROM student_personal_details WHERE AdNo=?";
+                
                 pst = conn.prepareStatement(sibdetails);
                 pst.setInt(1, sibID);
                 ResultSet rs1;
                 rs1 = pst.executeQuery();
+                
                 if (rs1.next()) {
                     String name = rs1.getString("FullName");
-                    txt_siblings.append(name + "\n");
+                    txt_siblingDetails.append(name + "\n");
                     System.out.println(name);
                     continue;
                 }
@@ -1088,13 +1122,17 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_tbl_studentsMouseClicked
 
+    /**
+     * combo_grade click event
+     * Select grade and class for a student
+     * @param evt select list
+     */
     private void combo_gradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_gradeActionPerformed
 
         combo_subclass.removeAllItems();
+        
         Date date = new Date();
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
@@ -1102,6 +1140,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
         String grade = (String) combo_grade.getSelectedItem();
 
+        //Search grade and class
         String sql1 = "SELECT class_grade,class_subclass,class_year FROM classes WHERE class_year=? AND class_grade=?";
         try {
             pst = conn.prepareStatement(sql1);
@@ -1115,69 +1154,85 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_combo_gradeActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.out.println("Malinda");
-        if (txt_add.equals("")
-                || txt_fullname.equals("") || txt_nameInitial.equals("") || txt_datechooser.equals("") || mothername.equals("") || motherocu.equals("") || fathername.equals("") || fatherocu.equals("") || fathermobile.equals("") || mothermobile.equals("") || homenum.equals("") || regdatechooser.equals("")) {
-
+    /**
+     * btnInsertStudent click event
+     * @param evt mouse click event
+     */
+    private void btnInsertStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertStudentActionPerformed
+        //System.out.println("Student Insert");
+        
+        if (
+                txt_studentAddress.equals("") || 
+                txt_fullname.equals("") || 
+                txt_nameInitial.equals("") || 
+                txt_dob.equals("") || 
+                mothername.equals("") || 
+                motherocu.equals("") || 
+                fathername.equals("") || 
+                fatherocu.equals("") || 
+                fathermobile.equals("") || 
+                mothermobile.equals("") || 
+                homenum.equals("") || 
+                regdatechooser.equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please fill all the fields");
-
         } else {
-
             int Adno = 0;
-            String newdate = null;
-            //personal details 
+            String newDate = null;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            
+            //Student details 
             String fullname = txt_fullname.getText();
             String nwi = txt_nameInitial.getText();
-            Date dob = txt_datechooser.getDate();
-            String add = txt_add.getText();
+            Date dob = txt_dob.getDate();
+            String add = txt_studentAddress.getText();
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String strDate = sdf.format(dob);
+            String strDOB = dateFormat.format(dob);
 
-            //parent details
+            //Parent details
             String Fathername = fathername.getText();
             String Fatherocu = fatherocu.getText();
             String Mothername = mothername.getText();
             String Motherocu = motherocu.getText();
 
-            //contact details
+            //Contact details
             String mothermob = mothermobile.getText();
             String fathermob = fathermobile.getText();
             String homeno = homenum.getText();
 
-            //reg details
+            //Register details
             Date regdate = regdatechooser.getDate();
-            newdate = sdf.format(regdate);
+            newDate = dateFormat.format(regdate);
             int grade = Integer.parseInt(combo_grade.getSelectedItem().toString());
             String subclass = combo_subclass.getSelectedItem().toString();
 
-            String personaldetails = "INSERT INTO student_personal_details(FullName,NameWithInitial,Birthday,Address,reg_date) VALUES('" + fullname + "','" + nwi + "','" + strDate + "','" + add + "','" + newdate + "')";
+            //Insert student details
+            String studentDetails = "INSERT INTO student_personal_details(FullName,NameWithInitial,Birthday,Address,reg_date) VALUES('" + fullname + "','" + nwi + "','" + strDOB + "','" + add + "','" + newDate + "')";   
             try {
-                pst = conn.prepareStatement(personaldetails);
+                pst = conn.prepareStatement(studentDetails);
                 pst.execute();
 
+                //Search index num, name
                 String getadno = "SELECT AdNo,FullName FROM student_personal_details WHERE FullName=?";
                 pst = conn.prepareStatement(getadno);
                 pst.setString(1, fullname);
                 rs = pst.executeQuery();
+                
                 if (rs.next()) {
-
                     Adno = rs.getInt("AdNo");
                     System.out.println(Adno);
                 }
 
-                String parentdetails = "INSERT INTO student_parent_details(std_ad_no, std_mother_name, std_mother_occupation, std_father_name, srd_father_occupation) VALUES ('" + Adno + "','" + Mothername + "','" + Motherocu + "','" + Fathername + "','" + Fatherocu + "')";
-                pst = conn.prepareStatement(parentdetails);
+                //Inseart parent details
+                String parentDetails = "INSERT INTO student_parent_details(std_ad_no, std_mother_name, std_mother_occupation, std_father_name, srd_father_occupation) VALUES ('" + Adno + "','" + Mothername + "','" + Motherocu + "','" + Fathername + "','" + Fatherocu + "')";
+                pst = conn.prepareStatement(parentDetails);
                 pst.execute();
-
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            //Insert parent contact details
             String contactDetails = "INSERT INTO student_contact_details (std_ad_no,std_home,std_mother_mobile,std_father_mobile) VALUES ('" + Adno + "','" + homeno + "','" + mothermob + "','" + fathermob + "')";
             try {
                 pst = conn.prepareStatement(contactDetails);
@@ -1187,15 +1242,18 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
             }
 
             int classid = 0;
+            
+            //Search grade and class
             String classSearch = "SELECT class_id,class_grade,class_subclass FROM classes where class_subclass LIKE '" + subclass + "' AND class_grade = '" + grade + "'";
             try {
                 pst = conn.prepareStatement(classSearch);
                 rs = pst.executeQuery();
+            
                 if (rs.next()) {
                     classid = rs.getInt("class_id");
-
                 }
 
+                //Insert grade and class
                 String classEnter = "INSERT INTO student_class (std_adno,class_id) VALUES ('" + Adno + "','" + classid + "')";
                 pst = conn.prepareStatement(classEnter);
                 pst.execute();
@@ -1203,9 +1261,10 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+            //Load each sibling details to textArea
             for (String line : txtarea_sib.getText().split("\\n")) {
                 try {
-                    siblingadd(line, Adno);
+                    siblingAdd(line, Adno);
                 } catch (SQLException ex) {
                     Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1213,28 +1272,46 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
             
             JOptionPane.showMessageDialog(ParentDPanal, "Data recorded...!!!");
         }
+    }//GEN-LAST:event_btnInsertStudentActionPerformed
 
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    public void siblingadd(String l, int newID) throws SQLException {
+    /**
+     * siblingAdd method
+     * @param l string
+     * @param newID sibling ID
+     * @throws SQLException  sql exception
+     */
+    public void siblingAdd(String l, int newID) throws SQLException {
+        //Search sibling index num and name 
         String searchID = "SELECT AdNo,FullName FROM student_personal_details WHERE Fullname=?";
+        
         pst = conn.prepareStatement(searchID);
         pst.setString(1, l);
         rs = pst.executeQuery();
+        
         if (rs.next()) {
             int sibID = rs.getInt("AdNo");
+            
+            //Insert sibling dwtails
             String entersib = "INSERT INTO student_siblings_details(std_ad_no,std_sib_ad) VALUES ('" + newID + "','" + sibID + "')";
+            
             pst = conn.prepareStatement(entersib);
             pst.execute();
         }
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String index = txt_sib.getText();
-        if (index.equals("")) {
+    /**
+     * btnInsertSiblings click event
+     * @param evt mouse click event
+     */
+    private void btnInsertSiblingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertSiblingsActionPerformed
+        String siblingIndexNum = txt_siblingIndexNum.getText();
+        
+        if (siblingIndexNum.equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Invalid Index No");
         } else {
-            int adno = Integer.parseInt(index);
+            int adno = Integer.parseInt(siblingIndexNum);
+            
+            //Search sibling 
             String sql = "SELECT AdNo, FullName FROM student_personal_details WHERE Adno=?";
             try {
                 pst = conn.prepareStatement(sql);
@@ -1244,43 +1321,56 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 if (rs.next()) {
                     String name = rs.getString("FullName");
                     txtarea_sib.append(name + "\n");
-
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Record not found");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnInsertSiblingsActionPerformed
 
+    /**
+     * fathermobileKeyTyped event
+     * Set only to numeric values
+     * @param evt event
+     */
     private void fathermobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fathermobileKeyTyped
         try {
             char c = evt.getKeyChar();
+            
             if (Character.isLetter(c)) {
                 evt.consume();
                 Toolkit.getDefaultToolkit().beep();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_fathermobileKeyTyped
 
+    /**
+     * homenumKeyTyped event
+     * Set only to numeric values
+     * @param evt event
+     */
     private void homenumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_homenumKeyTyped
         try {
             char c = evt.getKeyChar();
+            
             if (Character.isLetter(c)) {
                 evt.consume();
                 Toolkit.getDefaultToolkit().beep();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }//GEN-LAST:event_homenumKeyTyped
 
+    /**
+     * mothermobileKeyTyped event
+     * Set only to numeric values
+     * @param evt event
+     */
     private void mothermobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mothermobileKeyTyped
         try {
             char c = evt.getKeyChar();
@@ -1294,105 +1384,119 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_mothermobileKeyTyped
 
-    private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        indexno = Integer.parseInt(txt_index.getText());
-        fullname = txt_full_name.getText();
-        nwi = txt_name_initial.getText();
+    /**
+     * btnUpdate click event
+     * @param evt mouse click event
+     */
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        //Student details
+        indexNum = Integer.parseInt(txt_indexNum.getText());
+        fullname = txt_fullName.getText();
+        nwi = txt_nameWithInitial.getText();
         birthday = txt_birthday.getDate();
         address = txt_address.getText();
 
-        mothernamee = txt_mother_name.getText();;
-        motherocuu = txt_mother_occupation.getText();;
-        fathernamee = txt_father_name.getText();;
-        fatherocuu = txt_father_occupation.getText();;
+        //Parent details
+        mothernamee = txt_motherName.getText();;
+        motherocuu = txt_motherOccupation.getText();;
+        fathernamee = txt_fatherName.getText();;
+        fatherocuu = txt_fatherOccupation.getText();;
 
+        //Parent contact details
         mothermob = Integer.parseInt(txt_mother_mobile.getText());
-        fathermob = Integer.parseInt(txt_father_mobile.getText());
-        homeno = Integer.parseInt(txt_home.getText());
+        fathermob = Integer.parseInt(txt_fatherContactNum.getText());
+        homeno = Integer.parseInt(txt_homeContactNum.getText());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String strDate = sdf.format(birthday);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String strDOB = dateFormat.format(birthday);
 
         try {
-            //personal details update
-            String personal = "UPDATE student_personal_details SET FullName='" + fullname + "',NameWithInitial='" + nwi + "',Birthday='" + strDate + "',Address='" + address + "' WHERE AdNo='" + indexno + "'";
-            pst = conn.prepareStatement(personal);
-            pst.execute(personal);
+            
+            //Update student details
+            String studentDetails = "UPDATE student_personal_details SET FullName='" + fullname + "',NameWithInitial='" + nwi + "',Birthday='" + strDOB + "',Address='" + address + "' WHERE AdNo='" + indexNum + "'";
+            pst = conn.prepareStatement(studentDetails);
+            pst.execute(studentDetails);
 
-            //parent details update
-            String personalupdate = "UPDATE student_parent_details SET std_mother_name='" + mothername + "',std_mother_occupation='" + motherocu + "',std_father_name='" + fathername + "',srd_father_occupation='" + fatherocu + "' WHERE std_ad_no='" + indexno + "'";
-            pst = conn.prepareStatement(personalupdate);
-            pst.execute(personalupdate);
+            //Update parent details
+            String parentDetails = "UPDATE student_parent_details SET std_mother_name='" + mothername + "',std_mother_occupation='" + motherocu + "',std_father_name='" + fathername + "',srd_father_occupation='" + fatherocu + "' WHERE std_ad_no='" + indexNum + "'";
+            pst = conn.prepareStatement(parentDetails);
+            pst.execute(parentDetails);
 
-            //contact details update
-            String contactupdate = "UPDATE student_contact_details SET std_home='" + homeno + "',std_mother_mobile='" + mothermob + "',std_father_mobile='" + fathermob + "' WHERE std_ad_no='" + indexno + "'";
-            pst = conn.prepareStatement(contactupdate);
-            pst.execute(contactupdate);
-            //Success Message
+            //Update parent contact details
+            String parentContactDetails = "UPDATE student_contact_details SET std_home='" + homeno + "',std_mother_mobile='" + mothermob + "',std_father_mobile='" + fathermob + "' WHERE std_ad_no='" + indexNum + "'";
+            pst = conn.prepareStatement(parentContactDetails);
+            pst.execute(parentContactDetails);
+            
             JOptionPane.showMessageDialog(rootPane, "Successfully updated!");
-
         } catch (SQLException ex) {
             Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
-
-    }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
-        JFileChooser savefile = new JFileChooser();
-        String pathh;
-        int result = savefile.showSaveDialog(this);
+    /**
+     * btnExportReport click event
+     * @param evt mouse click event
+     */
+    private void btnExportReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportReportActionPerformed
+        //Save file chooser
+        JFileChooser saveFile = new JFileChooser();
+        
+        String filePath;
+        
+        int result = saveFile.showSaveDialog(this);
+        
         if (result == JFileChooser.APPROVE_OPTION) {
-            Path path = savefile.getSelectedFile().toPath();
-            pathh = path.toString().trim();
+            Path path = saveFile.getSelectedFile().toPath();
+            filePath = path.toString().trim();
 
-            String filename = pathh;
+            String fileName = filePath;
             PDDocument doc = new PDDocument();
             PDPage page = new PDPage();
 
-            indexno = Integer.parseInt(txt_index.getText());
-            fullname = txt_full_name.getText();
-            nwi = txt_name_initial.getText();
+            //Student details
+            indexNum = Integer.parseInt(txt_indexNum.getText());
+            fullname = txt_fullName.getText();
+            nwi = txt_nameWithInitial.getText();
             birthday = txt_birthday.getDate();
             address = txt_address.getText().toString().trim();
 
-            mothernamee = txt_mother_name.getText();
-            motherocuu = txt_mother_occupation.getText();
-            fathernamee = txt_father_name.getText();
-            fatherocuu = txt_father_occupation.getText();
+            //Parent details
+            mothernamee = txt_motherName.getText();
+            motherocuu = txt_motherOccupation.getText();
+            fathernamee = txt_fatherName.getText();
+            fatherocuu = txt_fatherOccupation.getText();
 
+            //Parent contact details
             mothermob = Integer.parseInt(txt_mother_mobile.getText());
-            fathermob = Integer.parseInt(txt_father_mobile.getText());
-            homeno = Integer.parseInt(txt_home.getText());
+            fathermob = Integer.parseInt(txt_fatherContactNum.getText());
+            homeno = Integer.parseInt(txt_homeContactNum.getText());
 
+            //Page add to document
             doc.addPage(page);
 
             try {
                 PDPageContentStream content = new PDPageContentStream(doc, page);
-
                 PDImageXObject pdImage = PDImageXObject.createFromFile("src\\admin\\logo.png", doc);
-
                 content.drawImage(pdImage, 250, 620);
 
-                //header
+                //Page header
                 content.beginText();
                 content.setFont(PDType1Font.HELVETICA, 26);
                 content.moveTextPositionByAmount(220, 550);
                 content.drawString("Student Profile");
                 content.endText();
 
-                //content
+                //Page contant
                 content.beginText();
                 content.setFont(PDType1Font.COURIER_BOLD, 16);
                 content.moveTextPositionByAmount(80, 500);
-                content.drawString("Personal Details");
+                content.drawString("Student Details");
                 content.endText();
-                //content
+                
                 content.beginText();
                 content.setFont(PDType1Font.COURIER, 14);
                 content.moveTextPositionByAmount(80, 470);
-                content.drawString("1. Index No             :     " + indexno);
+                content.drawString("1. Index No             :     " + indexNum);
                 content.endText();
 
                 content.beginText();
@@ -1453,7 +1557,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 content.beginText();
                 content.setFont(PDType1Font.COURIER, 14);
                 content.moveTextPositionByAmount(80, 220);
-                content.drawString("9. Fathers's Contact  :     " + fathermob);
+                content.drawString("9. Fathers's Contact  :      " + fathermob);
                 content.endText();
 
                 content.beginText();
@@ -1469,33 +1573,35 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 content.endText();
 
                 content.close();
-                doc.save(filename);
+                doc.save(fileName);
                 doc.close();
-                System.out.println(System.getProperty("user.dir"));
-
                 
+                //System.out.println(System.getProperty("user.dir"));
             } catch (IOException ex) {
                 Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
+    }//GEN-LAST:event_btnExportReportActionPerformed
 
-
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void txt_fatherContactNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_fatherContactNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_fatherContactNumActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CDPanal;
     private javax.swing.JPanel CDPanal1;
-    private javax.swing.JTextField Class_reg;
     private javax.swing.JPanel PDPanal;
     private javax.swing.JPanel PDPanal1;
     private javax.swing.JPanel ParentDPanal;
     private javax.swing.JPanel ParentDPanal1;
     private javax.swing.JPanel RDPanal;
     private javax.swing.JPanel RDPanal1;
-    private javax.swing.JButton btn_search;
-    private javax.swing.JButton btn_update;
+    private javax.swing.JButton btnExportReport;
+    private javax.swing.JButton btnInsertSiblings;
+    private javax.swing.JButton btnInsertStudent;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combo_grade;
     private javax.swing.JComboBox<String> combo_subclass;
@@ -1504,9 +1610,6 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     private javax.swing.JTextField fatherocu;
     private javax.swing.JTextField homenum;
     private javax.swing.JPanel insert;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1526,7 +1629,6 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -1552,32 +1654,34 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblStudentDetails;
     private javax.swing.JTextField mothermobile;
     private javax.swing.JTextField mothername;
     private javax.swing.JTextField motherocu;
     private com.toedter.calendar.JDateChooser regdatechooser;
+    private javax.swing.JTabbedPane tab_studentRecord;
     private javax.swing.JTable tbl_students;
-    private javax.swing.JTextField txt_add;
     private javax.swing.JTextField txt_address;
     private com.toedter.calendar.JDateChooser txt_birthday;
-    private com.toedter.calendar.JDateChooser txt_datechooser;
-    private javax.swing.JTextField txt_father_mobile;
-    private javax.swing.JTextField txt_father_name;
-    private javax.swing.JTextField txt_father_occupation;
-    private javax.swing.JTextField txt_full_name;
+    private com.toedter.calendar.JDateChooser txt_dob;
+    private javax.swing.JTextField txt_fatherContactNum;
+    private javax.swing.JTextField txt_fatherName;
+    private javax.swing.JTextField txt_fatherOccupation;
+    private javax.swing.JTextField txt_fullName;
     private javax.swing.JTextField txt_fullname;
-    private javax.swing.JTextField txt_home;
-    private javax.swing.JTextField txt_index;
+    private javax.swing.JTextField txt_homeContactNum;
+    private javax.swing.JTextField txt_indexNum;
+    private javax.swing.JTextField txt_motherName;
+    private javax.swing.JTextField txt_motherOccupation;
     private javax.swing.JTextField txt_mother_mobile;
-    private javax.swing.JTextField txt_mother_name;
-    private javax.swing.JTextField txt_mother_occupation;
     private javax.swing.JTextField txt_nameInitial;
-    private javax.swing.JTextField txt_name_initial;
-    private com.toedter.calendar.JDateChooser txt_regdate;
+    private javax.swing.JTextField txt_nameWithInitial;
+    private javax.swing.JTextField txt_regClass;
+    private com.toedter.calendar.JDateChooser txt_regDate;
     private javax.swing.JTextField txt_search;
-    private javax.swing.JTextField txt_sib;
-    private javax.swing.JTextArea txt_siblings;
+    private javax.swing.JTextArea txt_siblingDetails;
+    private javax.swing.JTextField txt_siblingIndexNum;
+    private javax.swing.JTextField txt_studentAddress;
     private javax.swing.JTextArea txtarea_sib;
     private javax.swing.JPanel view;
     // End of variables declaration//GEN-END:variables
