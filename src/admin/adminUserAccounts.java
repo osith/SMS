@@ -6,12 +6,18 @@
 package admin;
 
 import DatabaseConnection.DbConnect;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -24,6 +30,7 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
     ResultSet rs;
     Connection conn;
     PreparedStatement pst;
+    String path = null;
         
     /**
      * Creates new form adminUserAccounts
@@ -66,6 +73,14 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
         radio_date = new javax.swing.JRadioButton();
         radio_time = new javax.swing.JRadioButton();
         radio_user = new javax.swing.JRadioButton();
+        jPanel5 = new javax.swing.JPanel();
+        btn_browsePath = new javax.swing.JButton();
+        txt_path = new javax.swing.JTextField();
+        btn_backupDatabase = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        txt_sqlPath = new javax.swing.JTextField();
+        btn_browseSqlFile = new javax.swing.JButton();
+        btn_restoreDatabase = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setPreferredSize(new java.awt.Dimension(1141, 666));
@@ -278,6 +293,11 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
         buttonGroup1.add(radio_date);
         radio_date.setForeground(new java.awt.Color(255, 255, 255));
         radio_date.setText("Date");
+        radio_date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radio_dateActionPerformed(evt);
+            }
+        });
 
         radio_time.setBackground(new java.awt.Color(0, 153, 102));
         buttonGroup1.add(radio_time);
@@ -324,6 +344,96 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
         );
 
         jTabbedPane1.addTab("User Log", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(0, 153, 102));
+
+        btn_browsePath.setText("Browse path");
+        btn_browsePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_browsePathActionPerformed(evt);
+            }
+        });
+
+        btn_backupDatabase.setText("Backup Database");
+        btn_backupDatabase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backupDatabaseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(btn_backupDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(txt_path, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addComponent(btn_browsePath, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(189, 189, 189))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(123, 123, 123)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_path, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_browsePath, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_backupDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(401, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Backup Database", jPanel5);
+
+        jPanel6.setBackground(new java.awt.Color(0, 153, 102));
+
+        btn_browseSqlFile.setText("Browse SQL File");
+        btn_browseSqlFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_browseSqlFileActionPerformed(evt);
+            }
+        });
+
+        btn_restoreDatabase.setText("Restore Database");
+        btn_restoreDatabase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_restoreDatabaseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_restoreDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(txt_sqlPath, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_browseSqlFile, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(384, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_sqlPath, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_browseSqlFile, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_restoreDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(411, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Restore Database", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -460,8 +570,155 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_account_checkActionPerformed
 
+    private void btn_browsePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browsePathActionPerformed
+        
+        String filename;
+        JFileChooser fc = new JFileChooser();
+        fc.showOpenDialog(this);
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        try{
+            File f = fc.getSelectedFile();
+            path = f.getAbsolutePath();
+            path = path.replace('\\','/');
+            path = path +"_"+ date + ".sql ";
+            txt_path.setText(path);
+
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        
+        
+    }//GEN-LAST:event_btn_browsePathActionPerformed
+
+    private void btn_backupDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backupDatabaseActionPerformed
+        
+        Object[] colours = {"Yes", "No"};
+        int n = JOptionPane.showOptionDialog(rootPane, "Do you really needs to Backup the database",
+                title,
+                WIDTH,
+                HEIGHT,
+                frameIcon,
+                colours,
+                iconable);
+        
+        if(colours[n].equals("Yes")){
+            String password = JOptionPane.showInputDialog(this,"Enter admin password");
+            String user ="admin";
+            String sql ="SELECT * from user WHERE password='"+password+"' AND username='"+user+"'";
+            
+            try {
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                if(rs.next()){
+                    Process p;
+                    try{
+                        Runtime runtime = Runtime.getRuntime();
+                        p = runtime.exec("C:/xampp/mysql/bin/mysqldump.exe -uroot -ppassword --add-drop-database -B sms -r"+path);
+                        int processComplete = p.waitFor();
+                        if (processComplete==0) {
+                            JOptionPane.showMessageDialog(rootPane, "Backup Created");
+                        }else{
+                            JOptionPane.showMessageDialog(rootPane, "Backup couldn't create");
+                        }
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(rootPane, e);
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(adminUserAccounts.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else if(colours[n].equals("No")){
+        
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btn_backupDatabaseActionPerformed
+
+    private void btn_restoreDatabaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_restoreDatabaseActionPerformed
+        
+        Object[] colours = {"Yes", "No"};
+        int n = JOptionPane.showOptionDialog(rootPane, "Do you really needs to Backup the database",
+                title,
+                WIDTH,
+                HEIGHT,
+                frameIcon,
+                colours,
+                iconable);
+        
+        if(colours[n].equals("Yes")){
+            String password = JOptionPane.showInputDialog(this,"Enter admin password");
+            String user ="admin";
+            String sql ="SELECT * from user WHERE password='"+password+"' AND username='"+user+"'";
+            
+            try {
+                pst = conn.prepareStatement(sql);
+                rs = pst.executeQuery();
+                if(rs.next()){
+                    String dbUserName = "root";// username
+                    String dbPassword = "password";//Password
+        
+                    String[] restoreCmd = new String[]{"C:/xampp/mysql/bin/mysql.exe ", "--user=" + dbUserName, "--password=" + dbPassword, "-e", "source " + path};
+                    Process runtimProcess;
+                    try {
+                        runtimProcess = Runtime.getRuntime().exec(restoreCmd);
+                        int proceCom = runtimProcess.waitFor();
+            
+                        if (proceCom==0) {
+                            JOptionPane.showMessageDialog(rootPane, "Database Restored");
+                        }else{                        
+                            JOptionPane.showMessageDialog(rootPane, "Couldn't restore the database");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } 
+            } catch (SQLException ex) {
+                Logger.getLogger(adminUserAccounts.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if(colours[n].equals("No")){
+        
+        }
+        
+        
+        
+        
+        
+        
+        
+       
+    }//GEN-LAST:event_btn_restoreDatabaseActionPerformed
+
+    private void btn_browseSqlFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browseSqlFileActionPerformed
+       JFileChooser fc = new JFileChooser();
+       fc.showOpenDialog(this);
+        try {
+            File f = fc.getSelectedFile();
+            path = f.getAbsolutePath();
+            path = path.replace('\\', '/');
+            
+            txt_sqlPath.setText(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_browseSqlFileActionPerformed
+
+    private void radio_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radio_dateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_backupDatabase;
+    private javax.swing.JButton btn_browsePath;
+    private javax.swing.JButton btn_browseSqlFile;
+    private javax.swing.JButton btn_restoreDatabase;
     private javax.swing.JButton btn_update;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -472,6 +729,8 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -485,5 +744,7 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_name;
     private javax.swing.JPasswordField txt_password;
+    private javax.swing.JTextField txt_path;
+    private javax.swing.JTextField txt_sqlPath;
     // End of variables declaration//GEN-END:variables
 }
