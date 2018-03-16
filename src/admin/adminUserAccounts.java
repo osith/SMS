@@ -613,7 +613,7 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
                     Process p;
                     try{
                         Runtime runtime = Runtime.getRuntime();
-                        p = runtime.exec("C:/xampp/mysql/bin/mysqldump.exe -uroot -ppassword --add-drop-database -B sms -r"+path);
+                        p = runtime.exec("C:/wamp64/bin/mysql/mysql5.7.19/bin/mysqldump.exe -uroot --add-drop-database -B sms -r"+path);
                         int processComplete = p.waitFor();
                         if (processComplete==0) {
                             JOptionPane.showMessageDialog(rootPane, "Backup Created");
@@ -662,9 +662,9 @@ public class adminUserAccounts extends javax.swing.JInternalFrame {
                 rs = pst.executeQuery();
                 if(rs.next()){
                     String dbUserName = "root";// username
-                    String dbPassword = "password";//Password
+                    String dbPassword = "";//Password
         
-                    String[] restoreCmd = new String[]{"C:/xampp/mysql/bin/mysql.exe ", "--user=" + dbUserName, "--password=" + dbPassword, "-e", "source " + path};
+                    String[] restoreCmd = new String[]{"C:/wamp64/bin/mysql/mysql5.7.19/bin/mysql.exe ", "--user=" + dbUserName, "--password=" + dbPassword, "-e", "source " + path};
                     Process runtimProcess;
                     try {
                         runtimProcess = Runtime.getRuntime().exec(restoreCmd);

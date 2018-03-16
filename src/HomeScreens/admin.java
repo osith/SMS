@@ -68,12 +68,6 @@ public class admin extends javax.swing.JFrame {
         pnl_attendance = new javax.swing.JPanel();
         btn_attendance = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        pnl_other = new javax.swing.JPanel();
-        btn_other = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        pnl_leadership = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         pnl_performace = new javax.swing.JPanel();
         btn_performace = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -191,84 +185,6 @@ public class admin extends javax.swing.JFrame {
 
         sidepane.add(pnl_attendance, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 230, -1));
 
-        pnl_other.setBackground(new java.awt.Color(0, 204, 153));
-        pnl_other.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnl_otherMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnl_otherMousePressed(evt);
-            }
-        });
-
-        btn_other.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_other.setForeground(new java.awt.Color(255, 255, 255));
-        btn_other.setText("Other Performance");
-
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/otherp.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnl_otherLayout = new javax.swing.GroupLayout(pnl_other);
-        pnl_other.setLayout(pnl_otherLayout);
-        pnl_otherLayout.setHorizontalGroup(
-            pnl_otherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_otherLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_other)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        pnl_otherLayout.setVerticalGroup(
-            pnl_otherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_otherLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_otherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_other)
-                    .addComponent(jLabel9))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        sidepane.add(pnl_other, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, -1));
-
-        pnl_leadership.setBackground(new java.awt.Color(0, 204, 153));
-        pnl_leadership.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnl_leadershipMouseClicked(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnl_leadershipMousePressed(evt);
-            }
-        });
-
-        jLabel10.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Leadership");
-
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/leadership.png"))); // NOI18N
-
-        javax.swing.GroupLayout pnl_leadershipLayout = new javax.swing.GroupLayout(pnl_leadership);
-        pnl_leadership.setLayout(pnl_leadershipLayout);
-        pnl_leadershipLayout.setHorizontalGroup(
-            pnl_leadershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_leadershipLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10)
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
-        pnl_leadershipLayout.setVerticalGroup(
-            pnl_leadershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_leadershipLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnl_leadershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        sidepane.add(pnl_leadership, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 230, -1));
-
         pnl_performace.setBackground(new java.awt.Color(0, 204, 153));
         pnl_performace.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -283,6 +199,7 @@ public class admin extends javax.swing.JFrame {
         btn_performace.setForeground(new java.awt.Color(255, 255, 255));
         btn_performace.setText("Exam Performance");
 
+        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exam.png"))); // NOI18N
 
         javax.swing.GroupLayout pnl_performaceLayout = new javax.swing.GroupLayout(pnl_performace);
@@ -359,7 +276,7 @@ public class admin extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        sidepane.add(pnl_leadership1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, -1));
+        sidepane.add(pnl_leadership1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, -1));
 
         pnl_classdetails.setBackground(new java.awt.Color(0, 204, 153));
         pnl_classdetails.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -403,7 +320,7 @@ public class admin extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        sidepane.add(pnl_classdetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, -1, -1));
+        sidepane.add(pnl_classdetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, -1));
 
         pnl_userAccounts.setBackground(new java.awt.Color(0, 204, 153));
         pnl_userAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -447,7 +364,7 @@ public class admin extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        sidepane.add(pnl_userAccounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 230, -1));
+        sidepane.add(pnl_userAccounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, -1));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -572,9 +489,10 @@ public class admin extends javax.swing.JFrame {
     private void pnl_detailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_detailsMousePressed
         setColour(pnl_details);
         resetColour(pnl_attendance);
-        resetColour(pnl_leadership);
         resetColour(pnl_performace);
-        resetColour(pnl_other);
+        resetColour(pnl_userAccounts);
+        resetColour(pnl_leadership1);
+        resetColour(pnl_classdetails);
     }//GEN-LAST:event_pnl_detailsMousePressed
 
     private void pnl_attendanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_attendanceMouseClicked
@@ -593,42 +511,28 @@ public class admin extends javax.swing.JFrame {
     private void pnl_attendanceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_attendanceMousePressed
         setColour(pnl_attendance);
         resetColour(pnl_details);
-        resetColour(pnl_leadership);
         resetColour(pnl_performace);
-        resetColour(pnl_other);
+        resetColour(pnl_userAccounts);
+        resetColour(pnl_leadership1);
+        resetColour(pnl_classdetails);
     }//GEN-LAST:event_pnl_attendanceMousePressed
 
     private void pnl_performaceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_performaceMousePressed
         setColour(pnl_performace);
         resetColour(pnl_attendance);
         resetColour(pnl_details);
-        resetColour(pnl_leadership);
-        resetColour(pnl_other);
+        resetColour(pnl_userAccounts);
+        resetColour(pnl_leadership1);
+        resetColour(pnl_classdetails);
     }//GEN-LAST:event_pnl_performaceMousePressed
 
-    private void pnl_otherMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_otherMousePressed
-        setColour(pnl_other);
-        resetColour(pnl_performace);
-        resetColour(pnl_details);
-        resetColour(pnl_attendance);
-        resetColour(pnl_leadership);
-    }//GEN-LAST:event_pnl_otherMousePressed
-
-    private void pnl_leadershipMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadershipMousePressed
-        setColour(pnl_leadership);
-        resetColour(pnl_other);
-        resetColour(pnl_details);
-        resetColour(pnl_attendance);
-        resetColour(pnl_performace);
-
-    }//GEN-LAST:event_pnl_leadershipMousePressed
-
     private void pnl_leadership1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadership1MousePressed
-        setColour(pnl_leadership);
-        resetColour(pnl_other);
-        resetColour(pnl_details);
         resetColour(pnl_attendance);
+        resetColour(pnl_details);
         resetColour(pnl_performace);
+        resetColour(pnl_userAccounts);
+        setColour(pnl_leadership1);
+        resetColour(pnl_classdetails);
     }//GEN-LAST:event_pnl_leadership1MousePressed
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
@@ -659,20 +563,6 @@ public class admin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_pnl_performaceMouseClicked
 
-    private void pnl_otherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_otherMouseClicked
-        adminotherprof n1 = new adminotherprof();
-        deskpanal.removeAll();
-        deskpanal.updateUI();
-        deskpanal.add(n1).setVisible(true);
-    }//GEN-LAST:event_pnl_otherMouseClicked
-
-    private void pnl_leadershipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadershipMouseClicked
-//        adminleadership n1  = new adminleadership();
-//        deskpanal.removeAll();
-//        deskpanal.updateUI();
-//        deskpanal.add(n1).setVisible(true);
-    }//GEN-LAST:event_pnl_leadershipMouseClicked
-
     private void pnl_leadership1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadership1MouseClicked
 //        adminteacherdetails n1 = new adminteacherdetails();
 //        deskpanal.removeAll();
@@ -690,10 +580,11 @@ public class admin extends javax.swing.JFrame {
 
     private void pnl_classdetailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_classdetailsMousePressed
         setColour(pnl_classdetails);
-        resetColour(pnl_other);
-        resetColour(pnl_details);
         resetColour(pnl_attendance);
+        resetColour(pnl_details);
         resetColour(pnl_performace);
+        resetColour(pnl_userAccounts);
+        resetColour(pnl_leadership1);
 
         adminclassdetails n1;
         try {
@@ -718,11 +609,6 @@ public class admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel20MousePressed
 
     private void pnl_userAccountsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_userAccountsMouseClicked
-        setColour(pnl_classdetails);
-        resetColour(pnl_other);
-        resetColour(pnl_details);
-        resetColour(pnl_attendance);
-        resetColour(pnl_performace);
 
         adminUserAccounts usera;
         try {
@@ -738,7 +624,12 @@ public class admin extends javax.swing.JFrame {
     }//GEN-LAST:event_pnl_userAccountsMouseClicked
 
     private void pnl_userAccountsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_userAccountsMousePressed
-        // TODO add your handling code here:
+        resetColour(pnl_attendance);
+        resetColour(pnl_details);
+        resetColour(pnl_performace);
+        setColour(pnl_userAccounts);
+        resetColour(pnl_leadership1);
+        resetColour(pnl_classdetails);
     }//GEN-LAST:event_pnl_userAccountsMousePressed
 
     void setColour(JPanel pane1) {
@@ -788,12 +679,9 @@ public class admin extends javax.swing.JFrame {
     private javax.swing.JPanel bg;
     private javax.swing.JLabel btn_attendance;
     private javax.swing.JLabel btn_details;
-    private javax.swing.JLabel btn_other;
     private javax.swing.JLabel btn_performace;
     private javax.swing.JPanel deskpanal;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -809,16 +697,13 @@ public class admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel pnl_attendance;
     private javax.swing.JPanel pnl_classdetails;
     private javax.swing.JPanel pnl_details;
-    private javax.swing.JPanel pnl_leadership;
     private javax.swing.JPanel pnl_leadership1;
-    private javax.swing.JPanel pnl_other;
     private javax.swing.JPanel pnl_performace;
     private javax.swing.JPanel pnl_userAccounts;
     private javax.swing.JPanel sidepane;
