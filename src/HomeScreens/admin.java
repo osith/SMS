@@ -227,7 +227,7 @@ public class admin extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Student Management System");
+        jLabel2.setText("School Management System");
         sidepane.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 190, 30));
         sidepane.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 210, 20));
 

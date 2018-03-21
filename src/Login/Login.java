@@ -80,7 +80,7 @@ public final class Login extends javax.swing.JFrame {
         lbltitle.setBackground(new java.awt.Color(0, 102, 51));
         lbltitle.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lbltitle.setForeground(new java.awt.Color(0, 102, 102));
-        lbltitle.setText("STUDENT MANAGEMENT SYSTEM");
+        lbltitle.setText("SCHOOL MANAGEMENT SYSTEM");
         jPanel2.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 230, 31));
 
         txtusername.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N

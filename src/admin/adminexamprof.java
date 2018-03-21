@@ -1244,8 +1244,8 @@ public class adminexamprof extends javax.swing.JInternalFrame {
         double classavg = Double.parseDouble(table_marks.getValueAt(rr, 3).toString());
         
         DefaultPieDataset dataset = new DefaultPieDataset();
-         dataset.setValue("Attendance", new Double(marks));
-        dataset.setValue("Absents", new Double(classavg));
+         dataset.setValue("Marks", new Double(marks));
+        dataset.setValue("Class Avg", new Double(classavg));
         
         JFreeChart chart = ChartFactory.createPieChart("", dataset, true, true, true);
         
