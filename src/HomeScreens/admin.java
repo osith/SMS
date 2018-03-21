@@ -82,6 +82,9 @@ public class admin extends javax.swing.JFrame {
         pnl_userAccounts = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        pnl_filemanager = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -366,6 +369,50 @@ public class admin extends javax.swing.JFrame {
 
         sidepane.add(pnl_userAccounts, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, -1));
 
+        pnl_filemanager.setBackground(new java.awt.Color(0, 204, 153));
+        pnl_filemanager.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_filemanagerMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnl_filemanagerMousePressed(evt);
+            }
+        });
+
+        jLabel22.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("File Approvel");
+        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel22MousePressed(evt);
+            }
+        });
+
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/leadership.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnl_filemanagerLayout = new javax.swing.GroupLayout(pnl_filemanager);
+        pnl_filemanager.setLayout(pnl_filemanagerLayout);
+        pnl_filemanagerLayout.setHorizontalGroup(
+            pnl_filemanagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_filemanagerLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel22)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+        pnl_filemanagerLayout.setVerticalGroup(
+            pnl_filemanagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_filemanagerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnl_filemanagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        sidepane.add(pnl_filemanager, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, -1, -1));
+
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -632,6 +679,18 @@ public class admin extends javax.swing.JFrame {
         resetColour(pnl_classdetails);
     }//GEN-LAST:event_pnl_userAccountsMousePressed
 
+    private void jLabel22MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel22MousePressed
+
+    private void pnl_filemanagerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_filemanagerMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnl_filemanagerMouseClicked
+
+    private void pnl_filemanagerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_filemanagerMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnl_filemanagerMousePressed
+
     void setColour(JPanel pane1) {
         pane1.setBackground(new Color(0, 220, 153));
     }
@@ -693,6 +752,8 @@ public class admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -703,6 +764,7 @@ public class admin extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_attendance;
     private javax.swing.JPanel pnl_classdetails;
     private javax.swing.JPanel pnl_details;
+    private javax.swing.JPanel pnl_filemanager;
     private javax.swing.JPanel pnl_leadership1;
     private javax.swing.JPanel pnl_performace;
     private javax.swing.JPanel pnl_userAccounts;
