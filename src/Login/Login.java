@@ -20,21 +20,23 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 /**
- *
- * @author MalindaRaneshDeshapr
+ * This is Login class
+ * @author S.D. Sugathapala
  */
 public final class Login extends javax.swing.JFrame {
     Connection conn;
+    loginsql loginSQL = new loginsql();
+    
     public Login() {
-
         conn = DbConnect.ConnectDb();
         if (conn == null) {
-            DialogBox t1 = new DialogBox();
-            t1.setVisible(true);
+            /**
+             * dialogBox is an object from DialogBox class
+             */
+            DialogBox dialogBox = new DialogBox();
+            dialogBox.setVisible(true);
         } else {
-
             initComponents();
-            
         }
     }
     /**
@@ -50,9 +52,9 @@ public final class Login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         lbltitle1 = new javax.swing.JLabel();
         lbltitle = new javax.swing.JLabel();
-        txtusername = new javax.swing.JTextField();
-        txtpassword = new javax.swing.JPasswordField();
-        btnsubmit = new javax.swing.JButton();
+        txtUserName = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        btnSubmit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         radioAdmin = new javax.swing.JRadioButton();
@@ -83,32 +85,32 @@ public final class Login extends javax.swing.JFrame {
         lbltitle.setText("SCHOOL MANAGEMENT SYSTEM");
         jPanel2.add(lbltitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 230, 31));
 
-        txtusername.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        txtusername.setForeground(new java.awt.Color(0, 102, 102));
-        txtusername.addActionListener(new java.awt.event.ActionListener() {
+        txtUserName.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        txtUserName.setForeground(new java.awt.Color(0, 102, 102));
+        txtUserName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtusernameActionPerformed(evt);
+                txtUserNameActionPerformed(evt);
             }
         });
-        jPanel2.add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 220, 30));
+        jPanel2.add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 220, 30));
 
-        txtpassword.addActionListener(new java.awt.event.ActionListener() {
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtpasswordActionPerformed(evt);
+                txtPasswordActionPerformed(evt);
             }
         });
-        jPanel2.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 210, 220, 30));
+        jPanel2.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(158, 210, 220, 30));
 
-        btnsubmit.setBackground(new java.awt.Color(0, 153, 51));
-        btnsubmit.setForeground(new java.awt.Color(0, 153, 102));
-        btnsubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login/login.png"))); // NOI18N
-        btnsubmit.setText("SUBMIT");
-        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnSubmit.setBackground(new java.awt.Color(0, 153, 51));
+        btnSubmit.setForeground(new java.awt.Color(0, 153, 102));
+        btnSubmit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login/login.png"))); // NOI18N
+        btnSubmit.setText("SUBMIT");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsubmitActionPerformed(evt);
+                btnSubmitActionPerformed(evt);
             }
         });
-        jPanel2.add(btnsubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 110, 40));
+        jPanel2.add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 110, 40));
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, -1, 30));
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, 30));
 
@@ -138,51 +140,45 @@ public final class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
 
-    }//GEN-LAST:event_txtpasswordActionPerformed
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
+    private void txtUserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserNameActionPerformed
         
-    }//GEN-LAST:event_txtusernameActionPerformed
+    }//GEN-LAST:event_txtUserNameActionPerformed
 
-    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
+    /**
+     * btnSubmit click event
+     * @param evt mouse click event
+     */
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         
-        if(txtusername.getText().isEmpty()){
-            JOptionPane.showMessageDialog(rootPane,"Please provide the username");
-        }
-        else if(txtpassword.getText().isEmpty()){
-            JOptionPane.showMessageDialog(rootPane,"Please provide the password");
-        }
-        else{
-            String user = txtusername.getText();
-            String pass =txtpassword.getText();
+        if (txtUserName.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane,"Please enter the Username.");
+        } else if (txtPassword.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane,"Please enter the Password");
+        } else {
+            String user = txtUserName.getText();
+            String password =txtPassword.getText();
             
             if(radioTeacher.isSelected()){
-                loginsql lsql = new loginsql();
-                if(lsql.teacherlogin(user, pass)){
-                    
+                if (loginSQL.teacherlogin(user, password)) {
                     try {                        
-                        lsql.user_log(user, "teacher");                       
+                        loginSQL.user_log(user, "teacher");                       
                         admin t1 = new admin(user);
                         t1.setVisible(true);
                         this.setVisible(false);
-                        
-                        
                     } catch (Exception ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     } 
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(rootPane, "Invalid login details..!!!");
                 }
-            }
-            else if(radioAdmin.isSelected()){
-                loginsql lsql = new loginsql();
-                if(lsql.adminlogin(user, pass)){
-                    
+            } else if(radioAdmin.isSelected()) {
+                if (loginSQL.adminlogin(user, password)) {    
                     try {
-                        lsql.user_log(user, "admin");
+                        loginSQL.user_log(user, "admin");
                         admin ad = new admin(user);
                         ad.setVisible(true);
                         this.setVisible(false);
@@ -190,20 +186,15 @@ public final class Login extends javax.swing.JFrame {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (SQLException ex) {
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    
-                }
-                else{
+                    }  
+                } else {
                     JOptionPane.showMessageDialog(rootPane, "INvalid login details..!!!");
                 }
-            }
-            
-            else{
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Please select the role");
             }  
         }
-    }//GEN-LAST:event_btnsubmitActionPerformed
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,7 +231,7 @@ public final class Login extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnsubmit;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -251,7 +242,7 @@ public final class Login extends javax.swing.JFrame {
     private javax.swing.JLabel lbltitle1;
     private javax.swing.JRadioButton radioAdmin;
     private javax.swing.JRadioButton radioTeacher;
-    private javax.swing.JPasswordField txtpassword;
-    private javax.swing.JTextField txtusername;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

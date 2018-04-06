@@ -40,7 +40,7 @@ public class DialogBox extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Connect your device to internet !!! ");
+        jLabel2.setText("Connect your device to internet ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(0, 153, 204));

@@ -742,7 +742,7 @@ public class adminclassdetails extends javax.swing.JInternalFrame {
             
         }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_jYearChooser1MouseClicked
@@ -763,7 +763,7 @@ public class adminclassdetails extends javax.swing.JInternalFrame {
                 jComboBox2.addItem(rs.getString("class_subclass"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_combogradeActionPerformed
 

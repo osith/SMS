@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -31,9 +32,10 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 
 /**
  * This is AdminPersonalDetails class (Student)
+ *
  * @author S.D. Sugathapala
  */
-public class AdminPersonalDetails extends javax.swing.JInternalFrame {
+public class AdminStudentDetails extends javax.swing.JInternalFrame {
 
     ResultSet rs;
     Connection conn;
@@ -54,31 +56,32 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     int mothermob;
     int fathermob;
     int homeno;
-    
+
     String user;
 
     /**
      * AdminPersonalDetails constructor
+     *
      * @param user user role
      */
-    public AdminPersonalDetails(String user) {
-        
+    public AdminStudentDetails(String user) {
+
         //Database connection
         conn = DbConnect.ConnectDb();
-        
+
         //Current user
         this.user = user;
-        
+
         initComponents();
         setRootPaneCheckingEnabled(false);
-        
+
         Date date = new Date();
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         int year = calendar.get(Calendar.YEAR);
-        
+
         //if logged user is not admin update is disabled
-        if(!user.equals("admin")){
+        if (!user.equals("admin")) {
             btnUpdate.setEnabled(false);
             tab_studentRecord.disable();
         }
@@ -94,7 +97,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 combo_grade.addItem(rs.getString("class_grade"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -150,10 +153,9 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         txt_regClass = new javax.swing.JTextField();
         txt_regDate = new com.toedter.calendar.JDateChooser();
         jLabel40 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        txt_search = new javax.swing.JTextField();
+        radioIndexNo = new javax.swing.JRadioButton();
+        radioStudentName = new javax.swing.JRadioButton();
+        txt_searchKey = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_students = new javax.swing.JTable();
@@ -481,14 +483,11 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
         jLabel40.setText("Search By :");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Index No");
+        buttonGroup1.add(radioIndexNo);
+        radioIndexNo.setText("Index No");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Full Name");
-
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Contact No");
+        buttonGroup1.add(radioStudentName);
+        radioStudentName.setText("Student Name");
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -552,14 +551,13 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                             .addGroup(viewLayout.createSequentialGroup()
                                 .addComponent(jLabel40)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(viewLayout.createSequentialGroup()
-                                        .addComponent(jRadioButton1)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jRadioButton2)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jRadioButton3))
-                                    .addComponent(txt_search)))
+                                        .addGap(29, 29, 29)
+                                        .addComponent(radioIndexNo)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(radioStudentName))
+                                    .addComponent(txt_searchKey, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(viewLayout.createSequentialGroup()
                                 .addGap(81, 81, 81)
                                 .addComponent(btnSearch)
@@ -577,11 +575,10 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     .addGroup(viewLayout.createSequentialGroup()
                         .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel40)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton3))
+                            .addComponent(radioIndexNo)
+                            .addComponent(radioStudentName))
                         .addGap(18, 18, 18)
-                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_searchKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(viewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSearch)
@@ -603,7 +600,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        tab_studentRecord.addTab("View Personal Details", view);
+        tab_studentRecord.addTab("View Student Details", view);
 
         insert.setBackground(new java.awt.Color(206, 255, 179));
         insert.setPreferredSize(new java.awt.Dimension(1500, 600));
@@ -966,55 +963,79 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
     /**
      * btnSearch click event
+     *
      * @param evt mouse click event
      */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        String searchData = txt_search.getText();
-        int searchDataInt = Integer.parseInt(searchData);
+        if (radioIndexNo.isSelected()) {
+            String searchData = txt_searchKey.getText();
+            int searchDataInt = Integer.parseInt(searchData);
 
-        //Search student details by index number
-        String sql1 = "SELECT AdNo,FullName,NameWithInitial,Birthday,Address,reg_date FROM student_personal_details WHERE AdNo=?"; 
-        try {
-            pst = conn.prepareStatement(sql1);
-            pst.setInt(1, searchDataInt);
-            rs = pst.executeQuery();
+            //Search student details by index number
+            String sql1 = "SELECT AdNo,FullName,NameWithInitial,Birthday,Address,reg_date FROM student_personal_details WHERE AdNo=?";
+            try {
+                pst = conn.prepareStatement(sql1);
+                pst.setInt(1, searchDataInt);
+                rs = pst.executeQuery();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        } else if (radioStudentName.isSelected()) {
+            String searchData = txt_searchKey.getText();
+            //int searchDataInt = Integer.parseInt(searchData);
 
-        } catch (Exception e) {
-            System.out.println(e);
+            //Search student details by student name
+            String sql1 = "SELECT AdNo,FullName,NameWithInitial,Birthday,Address,reg_date FROM student_personal_details WHERE FullName LIKE ?";
+            try {
+                pst = conn.prepareStatement(sql1);
+                pst.setString(1, searchData+"%");
+                rs = pst.executeQuery();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
-        
+
         tbl_students.setModel(DbUtils.resultSetToTableModel(rs));
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * tbl_student click event
+     *
      * @param evt mouse click event
      */
     private void tbl_studentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_studentsMouseClicked
         txt_siblingDetails.setText("");
-        String searchData = txt_search.getText();
+        String searchData = txt_searchKey.getText();
         int searchDataInt = Integer.parseInt(searchData);
         int rr = tbl_students.getSelectedRow();
-        
+
         String AdNo = tbl_students.getValueAt(rr, 0).toString();
         String FullName = tbl_students.getValueAt(rr, 1).toString();
         String NameWI = tbl_students.getValueAt(rr, 2).toString();
-        String Birthday = tbl_students.getValueAt(rr, 3).toString();
+        String strBirthday = tbl_students.getValueAt(rr, 3).toString();
         String Address = tbl_students.getValueAt(rr, 4).toString();
-        String regdate1 = tbl_students.getValueAt(rr, 5).toString();
-        
-        java.util.Date date;
-        java.util.Date reg;
-        
-        try {
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(Birthday);
-            txt_birthday.setDate(date);
+        String strRegDate = tbl_students.getValueAt(rr, 5).toString();
+        //String strRegDate = "06/03/2014";
 
-            reg = new SimpleDateFormat("dd/MM/yyyy").parse(regdate1);
-            txt_regDate.setDate(reg);
+        //java.util.Date date;
+        //java.util.Date reg;
+        DateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");;
+        Date regDate;
+        Date birthday;
+        try {
+            birthday = (Date) dateFormatter.parse(strBirthday);
+            txt_birthday.setDate(birthday);
+
+            regDate = (Date) dateFormatter.parse(strRegDate);
+            txt_regDate.setDate(regDate);
+
+            //date = new SimpleDateFormat("dd/MM/yyyy").parse(Birthday);
+            //txt_birthday.setDate(date);
+            //reg = new SimpleDateFormat("dd/MM/yyyy").parse(regdate1);
+            //txt_regDate.setDate(reg);
         } catch (ParseException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         txt_indexNum.setText(AdNo);
@@ -1024,14 +1045,14 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
         //Parent details
         int ad = Integer.parseInt(AdNo);
-        
+
         //Search parent details
         String sql2 = "SELECT std_ad_no,std_mother_name,std_mother_occupation,std_father_name,srd_father_occupation FROM student_parent_details WHERE std_ad_no=?";
         try {
             pst = conn.prepareStatement(sql2);
             pst.setInt(1, ad);
             rs = pst.executeQuery();
-            
+
             if (rs.next()) {
                 String mothername = rs.getString("std_mother_name");
                 String motheroc = rs.getString("std_mother_occupation");
@@ -1053,7 +1074,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
             pst = conn.prepareStatement(sql3);
             pst.setInt(1, ad);
             rs = pst.executeQuery();
-            
+
             if (rs.next()) {
                 String home = rs.getString("std_home");
                 String father = rs.getString("std_father_mobile");
@@ -1087,11 +1108,11 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 txt_regClass.setText(newclass);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         int id = Integer.parseInt(txt_indexNum.getText());
-        
+
         //Search Siblings
         String searchsib = "SELECT std_ad_no, std_sib_ad FROM student_siblings_details WHERE std_ad_no=?";
         try {
@@ -1101,15 +1122,15 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
             while (rs.next()) {
                 int sibID = rs.getInt("std_sib_ad");
-                
+
                 //Search sibling index num, name
                 String sibdetails = "SELECT AdNo, FullName FROM student_personal_details WHERE AdNo=?";
-                
+
                 pst = conn.prepareStatement(sibdetails);
                 pst.setInt(1, sibID);
                 ResultSet rs1;
                 rs1 = pst.executeQuery();
-                
+
                 if (rs1.next()) {
                     String name = rs1.getString("FullName");
                     txt_siblingDetails.append(name + "\n");
@@ -1120,19 +1141,19 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 System.out.println(sibID);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_tbl_studentsMouseClicked
 
     /**
-     * combo_grade click event
-     * Select grade and class for a student
+     * combo_grade click event Select grade and class for a student
+     *
      * @param evt select list
      */
     private void combo_gradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_gradeActionPerformed
 
         combo_subclass.removeAllItems();
-        
+
         Date date = new Date();
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
@@ -1152,43 +1173,42 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 combo_subclass.addItem(rs.getString("class_subclass"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_combo_gradeActionPerformed
 
     /**
      * btnInsertStudent click event
+     *
      * @param evt mouse click event
      */
     private void btnInsertStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertStudentActionPerformed
         //System.out.println("Student Insert");
-        
-        if (
-                txt_studentAddress.equals("") || 
-                txt_fullname.equals("") || 
-                txt_nameInitial.equals("") || 
-                txt_dob.equals("") || 
-                mothername.equals("") || 
-                motherocu.equals("") || 
-                fathername.equals("") || 
-                fatherocu.equals("") || 
-                fathermobile.equals("") || 
-                mothermobile.equals("") || 
-                homenum.equals("") || 
-                regdatechooser.equals("")) {
+
+        if (txt_studentAddress.equals("")
+                || txt_fullname.equals("")
+                || txt_nameInitial.equals("")
+                || txt_dob.equals("")
+                || mothername.equals("")
+                || motherocu.equals("")
+                || fathername.equals("")
+                || fatherocu.equals("")
+                || fathermobile.equals("")
+                || mothermobile.equals("")
+                || homenum.equals("")
+                || regdatechooser.equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Please fill all the fields");
         } else {
             int Adno = 0;
-            String newDate = null;
+            String strRegDate = null;
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            
+
             //Student details 
             String fullname = txt_fullname.getText();
             String nwi = txt_nameInitial.getText();
             Date dob = txt_dob.getDate();
-            String add = txt_studentAddress.getText();
-
             String strDOB = dateFormat.format(dob);
+            String add = txt_studentAddress.getText();
 
             //Parent details
             String Fathername = fathername.getText();
@@ -1203,12 +1223,12 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
             //Register details
             Date regdate = regdatechooser.getDate();
-            newDate = dateFormat.format(regdate);
+            strRegDate = dateFormat.format(regdate);
             int grade = Integer.parseInt(combo_grade.getSelectedItem().toString());
             String subclass = combo_subclass.getSelectedItem().toString();
 
             //Insert student details
-            String studentDetails = "INSERT INTO student_personal_details(FullName,NameWithInitial,Birthday,Address,reg_date) VALUES('" + fullname + "','" + nwi + "','" + strDOB + "','" + add + "','" + newDate + "')";   
+            String studentDetails = "INSERT INTO student_personal_details(FullName,NameWithInitial,Birthday,Address,reg_date) VALUES('" + fullname + "','" + nwi + "','" + strDOB + "','" + add + "','" + strRegDate + "')";
             try {
                 pst = conn.prepareStatement(studentDetails);
                 pst.execute();
@@ -1218,7 +1238,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 pst = conn.prepareStatement(getadno);
                 pst.setString(1, fullname);
                 rs = pst.executeQuery();
-                
+
                 if (rs.next()) {
                     Adno = rs.getInt("AdNo");
                     System.out.println(Adno);
@@ -1229,7 +1249,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 pst = conn.prepareStatement(parentDetails);
                 pst.execute();
             } catch (SQLException ex) {
-                Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             //Insert parent contact details
@@ -1238,17 +1258,17 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 pst = conn.prepareStatement(contactDetails);
                 pst.execute();
             } catch (SQLException ex) {
-                Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             int classid = 0;
-            
+
             //Search grade and class
             String classSearch = "SELECT class_id,class_grade,class_subclass FROM classes where class_subclass LIKE '" + subclass + "' AND class_grade = '" + grade + "'";
             try {
                 pst = conn.prepareStatement(classSearch);
                 rs = pst.executeQuery();
-            
+
                 if (rs.next()) {
                     classid = rs.getInt("class_id");
                 }
@@ -1258,7 +1278,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 pst = conn.prepareStatement(classEnter);
                 pst.execute();
             } catch (SQLException ex) {
-                Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             //Load each sibling details to textArea
@@ -1266,34 +1286,35 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 try {
                     siblingAdd(line, Adno);
                 } catch (SQLException ex) {
-                    Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
             JOptionPane.showMessageDialog(ParentDPanal, "Data recorded...!!!");
         }
     }//GEN-LAST:event_btnInsertStudentActionPerformed
 
     /**
      * siblingAdd method
+     *
      * @param l string
      * @param newID sibling ID
-     * @throws SQLException  sql exception
+     * @throws SQLException sql exception
      */
     public void siblingAdd(String l, int newID) throws SQLException {
         //Search sibling index num and name 
         String searchID = "SELECT AdNo,FullName FROM student_personal_details WHERE Fullname=?";
-        
+
         pst = conn.prepareStatement(searchID);
         pst.setString(1, l);
         rs = pst.executeQuery();
-        
+
         if (rs.next()) {
             int sibID = rs.getInt("AdNo");
-            
+
             //Insert sibling dwtails
             String entersib = "INSERT INTO student_siblings_details(std_ad_no,std_sib_ad) VALUES ('" + newID + "','" + sibID + "')";
-            
+
             pst = conn.prepareStatement(entersib);
             pst.execute();
         }
@@ -1301,16 +1322,17 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
     /**
      * btnInsertSiblings click event
+     *
      * @param evt mouse click event
      */
     private void btnInsertSiblingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertSiblingsActionPerformed
         String siblingIndexNum = txt_siblingIndexNum.getText();
-        
+
         if (siblingIndexNum.equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Invalid Index No");
         } else {
             int adno = Integer.parseInt(siblingIndexNum);
-            
+
             //Search sibling 
             String sql = "SELECT AdNo, FullName FROM student_personal_details WHERE Adno=?";
             try {
@@ -1325,20 +1347,20 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(rootPane, "Record not found");
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnInsertSiblingsActionPerformed
 
     /**
-     * fathermobileKeyTyped event
-     * Set only to numeric values
+     * fathermobileKeyTyped event Set only to numeric values
+     *
      * @param evt event
      */
     private void fathermobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fathermobileKeyTyped
         try {
             char c = evt.getKeyChar();
-            
+
             if (Character.isLetter(c)) {
                 evt.consume();
                 Toolkit.getDefaultToolkit().beep();
@@ -1349,14 +1371,14 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_fathermobileKeyTyped
 
     /**
-     * homenumKeyTyped event
-     * Set only to numeric values
+     * homenumKeyTyped event Set only to numeric values
+     *
      * @param evt event
      */
     private void homenumKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_homenumKeyTyped
         try {
             char c = evt.getKeyChar();
-            
+
             if (Character.isLetter(c)) {
                 evt.consume();
                 Toolkit.getDefaultToolkit().beep();
@@ -1367,8 +1389,8 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_homenumKeyTyped
 
     /**
-     * mothermobileKeyTyped event
-     * Set only to numeric values
+     * mothermobileKeyTyped event Set only to numeric values
+     *
      * @param evt event
      */
     private void mothermobileKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mothermobileKeyTyped
@@ -1386,6 +1408,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
 
     /**
      * btnUpdate click event
+     *
      * @param evt mouse click event
      */
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -1411,7 +1434,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
         String strDOB = dateFormat.format(birthday);
 
         try {
-            
+
             //Update student details
             String studentDetails = "UPDATE student_personal_details SET FullName='" + fullname + "',NameWithInitial='" + nwi + "',Birthday='" + strDOB + "',Address='" + address + "' WHERE AdNo='" + indexNum + "'";
             pst = conn.prepareStatement(studentDetails);
@@ -1426,25 +1449,26 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
             String parentContactDetails = "UPDATE student_contact_details SET std_home='" + homeno + "',std_mother_mobile='" + mothermob + "',std_father_mobile='" + fathermob + "' WHERE std_ad_no='" + indexNum + "'";
             pst = conn.prepareStatement(parentContactDetails);
             pst.execute(parentContactDetails);
-            
+
             JOptionPane.showMessageDialog(rootPane, "Successfully updated!");
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * btnExportReport click event
+     *
      * @param evt mouse click event
      */
     private void btnExportReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportReportActionPerformed
         //Save file chooser
         JFileChooser saveFile = new JFileChooser();
-        
+
         String filePath;
-        
+
         int result = saveFile.showSaveDialog(this);
-        
+
         if (result == JFileChooser.APPROVE_OPTION) {
             Path path = saveFile.getSelectedFile().toPath();
             filePath = path.toString().trim();
@@ -1492,7 +1516,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 content.moveTextPositionByAmount(80, 500);
                 content.drawString("Student Details");
                 content.endText();
-                
+
                 content.beginText();
                 content.setFont(PDType1Font.COURIER, 14);
                 content.moveTextPositionByAmount(80, 470);
@@ -1517,7 +1541,6 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 content.drawString("4. Date of birth        :     " + birthday);
                 content.endText();
 
-                
                 content.beginText();
                 content.setFont(PDType1Font.COURIER_BOLD, 16);
                 content.moveTextPositionByAmount(80, 380);
@@ -1575,10 +1598,10 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
                 content.close();
                 doc.save(fileName);
                 doc.close();
-                
+
                 //System.out.println(System.getProperty("user.dir"));
             } catch (IOException ex) {
-                Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnExportReportActionPerformed
@@ -1648,9 +1671,6 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1658,6 +1678,8 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     private javax.swing.JTextField mothermobile;
     private javax.swing.JTextField mothername;
     private javax.swing.JTextField motherocu;
+    private javax.swing.JRadioButton radioIndexNo;
+    private javax.swing.JRadioButton radioStudentName;
     private com.toedter.calendar.JDateChooser regdatechooser;
     private javax.swing.JTabbedPane tab_studentRecord;
     private javax.swing.JTable tbl_students;
@@ -1678,7 +1700,7 @@ public class AdminPersonalDetails extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_nameWithInitial;
     private javax.swing.JTextField txt_regClass;
     private com.toedter.calendar.JDateChooser txt_regDate;
-    private javax.swing.JTextField txt_search;
+    private javax.swing.JTextField txt_searchKey;
     private javax.swing.JTextArea txt_siblingDetails;
     private javax.swing.JTextField txt_siblingIndexNum;
     private javax.swing.JTextField txt_studentAddress;

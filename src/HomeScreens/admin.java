@@ -6,13 +6,11 @@
 package HomeScreens;
 
 import Login.Login;
-import admin.AdminPersonalDetails;
+import admin.AdminStudentDetails;
 import admin.adminattendance;
-import admin.adminexamprof;
 import java.awt.Color;
 import javax.swing.JPanel;
 import admin.*;
-import java.awt.Container;
 import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author MalindaRaneshDeshapr
+ * @author S.D. Sugathapala
  */
 public class admin extends javax.swing.JFrame {
 
@@ -35,8 +33,10 @@ public class admin extends javax.swing.JFrame {
         //this.setLocationByPlatform(rootPaneCheckingEnabled);
         //this.setUndecorated(true);
         initComponents();
+        
         this.user = techerid;
         Toolkit tk = Toolkit.getDefaultToolkit();
+        
         int xsize = (int) tk.getScreenSize().getWidth();
         int ysize = (int) tk.getScreenSize().getHeight();
         this.setSize(xsize, ysize);
@@ -44,7 +44,6 @@ public class admin extends javax.swing.JFrame {
         if (!user.equals("admin")) {
             pnl_userAccounts.hide();
         }
-
     }
 
     private admin() {
@@ -62,8 +61,8 @@ public class admin extends javax.swing.JFrame {
 
         bg = new javax.swing.JPanel();
         sidepane = new javax.swing.JPanel();
-        pnl_details = new javax.swing.JPanel();
-        btn_details = new javax.swing.JLabel();
+        pnl_studentDetails = new javax.swing.JPanel();
+        btn_StudentDetails = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         pnl_attendance = new javax.swing.JPanel();
         btn_attendance = new javax.swing.JLabel();
@@ -76,21 +75,21 @@ public class admin extends javax.swing.JFrame {
         pnl_leadership1 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        pnl_classdetails = new javax.swing.JPanel();
+        pnl_classDetails = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         pnl_userAccounts = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        lbl_profilePic = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         deskpanal = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lbl_minimized = new javax.swing.JLabel();
+        lbl_exit = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1366, 768));
@@ -107,44 +106,44 @@ public class admin extends javax.swing.JFrame {
         sidepane.setBackground(new java.awt.Color(0, 204, 153));
         sidepane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnl_details.setBackground(new java.awt.Color(0, 220, 153));
-        pnl_details.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnl_studentDetails.setBackground(new java.awt.Color(0, 220, 153));
+        pnl_studentDetails.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnl_detailsMouseClicked(evt);
+                pnl_studentDetailsMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnl_detailsMousePressed(evt);
+                pnl_studentDetailsMousePressed(evt);
             }
         });
 
-        btn_details.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btn_details.setForeground(new java.awt.Color(255, 255, 255));
-        btn_details.setText("Student Details");
+        btn_StudentDetails.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btn_StudentDetails.setForeground(new java.awt.Color(255, 255, 255));
+        btn_StudentDetails.setText("Student Details");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/student-with-graduation-cap (2).png"))); // NOI18N
 
-        javax.swing.GroupLayout pnl_detailsLayout = new javax.swing.GroupLayout(pnl_details);
-        pnl_details.setLayout(pnl_detailsLayout);
-        pnl_detailsLayout.setHorizontalGroup(
-            pnl_detailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_detailsLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_studentDetailsLayout = new javax.swing.GroupLayout(pnl_studentDetails);
+        pnl_studentDetails.setLayout(pnl_studentDetailsLayout);
+        pnl_studentDetailsLayout.setHorizontalGroup(
+            pnl_studentDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_studentDetailsLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_details, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_StudentDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(49, Short.MAX_VALUE))
         );
-        pnl_detailsLayout.setVerticalGroup(
-            pnl_detailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_detailsLayout.createSequentialGroup()
+        pnl_studentDetailsLayout.setVerticalGroup(
+            pnl_studentDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_studentDetailsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_detailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_details)
+                .addGroup(pnl_studentDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btn_StudentDetails)
                     .addComponent(jLabel3))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        sidepane.add(pnl_details, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 40));
+        sidepane.add(pnl_studentDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, 40));
 
         pnl_attendance.setBackground(new java.awt.Color(0, 204, 153));
         pnl_attendance.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -278,13 +277,13 @@ public class admin extends javax.swing.JFrame {
 
         sidepane.add(pnl_leadership1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, -1));
 
-        pnl_classdetails.setBackground(new java.awt.Color(0, 204, 153));
-        pnl_classdetails.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnl_classDetails.setBackground(new java.awt.Color(0, 204, 153));
+        pnl_classDetails.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnl_classdetailsMouseClicked(evt);
+                pnl_classDetailsMouseClicked(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                pnl_classdetailsMousePressed(evt);
+                pnl_classDetailsMousePressed(evt);
             }
         });
 
@@ -299,28 +298,28 @@ public class admin extends javax.swing.JFrame {
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/leadership.png"))); // NOI18N
 
-        javax.swing.GroupLayout pnl_classdetailsLayout = new javax.swing.GroupLayout(pnl_classdetails);
-        pnl_classdetails.setLayout(pnl_classdetailsLayout);
-        pnl_classdetailsLayout.setHorizontalGroup(
-            pnl_classdetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_classdetailsLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_classDetailsLayout = new javax.swing.GroupLayout(pnl_classDetails);
+        pnl_classDetails.setLayout(pnl_classDetailsLayout);
+        pnl_classDetailsLayout.setHorizontalGroup(
+            pnl_classDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_classDetailsLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel18)
                 .addContainerGap(69, Short.MAX_VALUE))
         );
-        pnl_classdetailsLayout.setVerticalGroup(
-            pnl_classdetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_classdetailsLayout.createSequentialGroup()
+        pnl_classDetailsLayout.setVerticalGroup(
+            pnl_classDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_classDetailsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_classdetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(pnl_classDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel18)
                     .addComponent(jLabel19))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        sidepane.add(pnl_classdetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, -1));
+        sidepane.add(pnl_classDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, -1, -1));
 
         pnl_userAccounts.setBackground(new java.awt.Color(0, 204, 153));
         pnl_userAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -369,8 +368,8 @@ public class admin extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user (3).png"))); // NOI18N
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 10, 60, 60));
+        lbl_profilePic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user (3).png"))); // NOI18N
+        jPanel1.add(lbl_profilePic, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 10, 60, 60));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -417,21 +416,21 @@ public class admin extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(0, 204, 153));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimise-button.png"))); // NOI18N
-        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbl_minimized.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/minimise-button.png"))); // NOI18N
+        lbl_minimized.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel15MouseClicked(evt);
+                lbl_minimizedMouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 0, 20, 30));
+        jPanel5.add(lbl_minimized, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 0, 20, 30));
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+        lbl_exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        lbl_exit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel16MouseClicked(evt);
+                lbl_exitMouseClicked(evt);
             }
         });
-        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 20, 30));
+        jPanel5.add(lbl_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 0, 20, 30));
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -476,25 +475,41 @@ public class admin extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosed
 
-    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
-        Login l1 = new Login();
-        l1.setVisible(true);
+    /**
+     * lbl_exit chick event
+     * @param evt mouse click event
+     */
+    private void lbl_exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_exitMouseClicked
+        Login login = new Login();
+        login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jLabel16MouseClicked
+    }//GEN-LAST:event_lbl_exitMouseClicked
 
-    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+    /**
+     * lbl_minimized click event
+     * @param evt mouse click event
+     */
+    private void lbl_minimizedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_minimizedMouseClicked
         this.setState(this.ICONIFIED);
-    }//GEN-LAST:event_jLabel15MouseClicked
+    }//GEN-LAST:event_lbl_minimizedMouseClicked
 
-    private void pnl_detailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_detailsMousePressed
-        setColour(pnl_details);
+    /**
+     * pnl_studentDetails pressed event
+     * @param evt mouse press event
+     */
+    private void pnl_studentDetailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_studentDetailsMousePressed
+        setColour(pnl_studentDetails);
         resetColour(pnl_attendance);
         resetColour(pnl_performace);
         resetColour(pnl_userAccounts);
         resetColour(pnl_leadership1);
-        resetColour(pnl_classdetails);
-    }//GEN-LAST:event_pnl_detailsMousePressed
+        resetColour(pnl_classDetails);
+    }//GEN-LAST:event_pnl_studentDetailsMousePressed
 
+    /**
+     * pnl_attendance click event
+     * @param evt mouse click event
+     */
     private void pnl_attendanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_attendanceMouseClicked
         adminattendance n1;
         try {
@@ -505,86 +520,63 @@ public class admin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_pnl_attendanceMouseClicked
 
+    /**
+     * pnl_attendance press event
+     * @param evt mouse press event
+     */
     private void pnl_attendanceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_attendanceMousePressed
         setColour(pnl_attendance);
-        resetColour(pnl_details);
+        resetColour(pnl_studentDetails);
         resetColour(pnl_performace);
         resetColour(pnl_userAccounts);
         resetColour(pnl_leadership1);
-        resetColour(pnl_classdetails);
+        resetColour(pnl_classDetails);
     }//GEN-LAST:event_pnl_attendanceMousePressed
 
     private void pnl_performaceMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_performaceMousePressed
-        setColour(pnl_performace);
-        resetColour(pnl_attendance);
-        resetColour(pnl_details);
-        resetColour(pnl_userAccounts);
-        resetColour(pnl_leadership1);
-        resetColour(pnl_classdetails);
+
     }//GEN-LAST:event_pnl_performaceMousePressed
 
     private void pnl_leadership1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadership1MousePressed
-        resetColour(pnl_attendance);
-        resetColour(pnl_details);
-        resetColour(pnl_performace);
-        resetColour(pnl_userAccounts);
-        setColour(pnl_leadership1);
-        resetColour(pnl_classdetails);
+
     }//GEN-LAST:event_pnl_leadership1MousePressed
 
     private void jLabel12MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MousePressed
 
     }//GEN-LAST:event_jLabel12MousePressed
 
-    private void pnl_detailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_detailsMouseClicked
-        AdminPersonalDetails n1 = new AdminPersonalDetails(user);
+    /**
+     * pnl_studentDetails click event
+     * @param evt mouse click event
+     */
+    private void pnl_studentDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_studentDetailsMouseClicked
+        AdminStudentDetails n1 = new AdminStudentDetails(user);
         deskpanal.removeAll();
         deskpanal.updateUI();
         deskpanal.add(n1).setVisible(true);
 
         n1.setFrameIcon(null);
-
-    }//GEN-LAST:event_pnl_detailsMouseClicked
+    }//GEN-LAST:event_pnl_studentDetailsMouseClicked
 
     private void pnl_performaceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_performaceMouseClicked
-        adminexamprof n1;
-        try {
-            n1 = new adminexamprof(user);
-            deskpanal.removeAll();
-            deskpanal.updateUI();
-            deskpanal.add(n1).setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
 
     }//GEN-LAST:event_pnl_performaceMouseClicked
 
     private void pnl_leadership1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_leadership1MouseClicked
-//        adminteacherdetails n1 = new adminteacherdetails();
-//        deskpanal.removeAll();
-//        deskpanal.updateUI();
-//        deskpanal.add(n1).setVisible(true);
+
     }//GEN-LAST:event_pnl_leadership1MouseClicked
 
     private void jLabel18MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel18MousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel18MousePressed
 
-    private void pnl_classdetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_classdetailsMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_classdetailsMouseClicked
-
-    private void pnl_classdetailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_classdetailsMousePressed
-        setColour(pnl_classdetails);
-        resetColour(pnl_attendance);
-        resetColour(pnl_details);
-        resetColour(pnl_performace);
-        resetColour(pnl_userAccounts);
-        resetColour(pnl_leadership1);
+    /**
+     * pnl_classDetails click event
+     * @param evt mouse click event
+     */
+    private void pnl_classDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_classDetailsMouseClicked
 
         adminclassdetails n1;
         try {
@@ -596,9 +588,20 @@ public class admin extends javax.swing.JFrame {
             System.out.println("Malinda");
             //1Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_pnl_classDetailsMouseClicked
 
-
-    }//GEN-LAST:event_pnl_classdetailsMousePressed
+    /**
+     * pnl_classDetails press event
+     * @param evt mouse press event
+     */
+    private void pnl_classDetailsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_classDetailsMousePressed
+        setColour(pnl_classDetails);
+        resetColour(pnl_attendance);
+        resetColour(pnl_studentDetails);
+        resetColour(pnl_performace);
+        resetColour(pnl_userAccounts);
+        resetColour(pnl_leadership1);
+    }//GEN-LAST:event_pnl_classDetailsMousePressed
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         // TODO add your handling code here:
@@ -608,6 +611,10 @@ public class admin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel20MousePressed
 
+    /**
+     * pnl_userAccount click event
+     * @param evt mouse click event
+     */
     private void pnl_userAccountsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_userAccountsMouseClicked
 
         adminUserAccounts usera;
@@ -619,23 +626,33 @@ public class admin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_pnl_userAccountsMouseClicked
 
+    /**
+     * pnl_userAccount press event
+     * @param evt mouse press event
+     */
     private void pnl_userAccountsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_userAccountsMousePressed
         resetColour(pnl_attendance);
-        resetColour(pnl_details);
+        resetColour(pnl_studentDetails);
         resetColour(pnl_performace);
         setColour(pnl_userAccounts);
         resetColour(pnl_leadership1);
-        resetColour(pnl_classdetails);
+        resetColour(pnl_classDetails);
     }//GEN-LAST:event_pnl_userAccountsMousePressed
 
+    /**
+     * setColor method
+     * @param pane1 pass the panel
+     */
     void setColour(JPanel pane1) {
         pane1.setBackground(new Color(0, 220, 153));
     }
 
+    /**
+     * resetColor method
+     * @param pane1 pass the panel
+     */
     void resetColour(JPanel pane1) {
         pane1.setBackground(new Color(0, 204, 153));
     }
@@ -677,16 +694,14 @@ public class admin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JLabel btn_StudentDetails;
     private javax.swing.JLabel btn_attendance;
-    private javax.swing.JLabel btn_details;
     private javax.swing.JLabel btn_performace;
     private javax.swing.JPanel deskpanal;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -695,16 +710,18 @@ public class admin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbl_exit;
+    private javax.swing.JLabel lbl_minimized;
+    private javax.swing.JLabel lbl_profilePic;
     private javax.swing.JPanel pnl_attendance;
-    private javax.swing.JPanel pnl_classdetails;
-    private javax.swing.JPanel pnl_details;
+    private javax.swing.JPanel pnl_classDetails;
     private javax.swing.JPanel pnl_leadership1;
     private javax.swing.JPanel pnl_performace;
+    private javax.swing.JPanel pnl_studentDetails;
     private javax.swing.JPanel pnl_userAccounts;
     private javax.swing.JPanel sidepane;
     // End of variables declaration//GEN-END:variables

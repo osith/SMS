@@ -1134,7 +1134,7 @@ public class adminattendance extends javax.swing.JInternalFrame {
                 combo_subclass.addItem(rs.getString("class_subclass"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AdminPersonalDetails.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdminStudentDetails.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_combo_gradeActionPerformed
 
