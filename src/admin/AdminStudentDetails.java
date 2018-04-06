@@ -1007,7 +1007,7 @@ public class AdminStudentDetails extends javax.swing.JInternalFrame {
     private void tbl_studentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_studentsMouseClicked
         txt_siblingDetails.setText("");
         String searchData = txt_searchKey.getText();
-        int searchDataInt = Integer.parseInt(searchData);
+        //int searchDataInt = Integer.parseInt(searchData);
         int rr = tbl_students.getSelectedRow();
 
         String AdNo = tbl_students.getValueAt(rr, 0).toString();
@@ -1093,7 +1093,7 @@ public class AdminStudentDetails extends javax.swing.JInternalFrame {
         String sql6 = "SELECT C.class_grade, C.class_subclass, min(S.std_adno) FROM student_class S, classes C WHERE S.std_adno=?";
         try {
             pst = conn.prepareStatement(sql6);
-            pst.setInt(1, searchDataInt);
+            pst.setString(1, searchData);
             rs = pst.executeQuery();
 
             if (rs.next()) {
