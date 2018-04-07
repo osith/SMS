@@ -19,7 +19,7 @@ public class DbConnect {
         try{
            
           Class.forName("com.mysql.jdbc.Driver");
-           con = DriverManager.getConnection("jdbc:mysql://localhost/sms","root","");
+           con = DriverManager.getConnection("jdbc:mysql://localhost/sms","root","password");
            if(con!=null){
                //System.out.println("Connected");
            }

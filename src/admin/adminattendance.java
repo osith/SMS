@@ -72,7 +72,7 @@ public class adminattendance extends javax.swing.JInternalFrame {
        DefaultPieDataset dataset = new DefaultPieDataset();
        dataset.setValue("Attendance",new Integer(att));
        dataset.setValue("Absents",new Integer(abs));
-       dataset.setValue("Register Date",new Integer(regdate));
+       //dataset.setValue("Register Date",new Integer(regdate));
        JFreeChart chart = ChartFactory.createPieChart("Attendance", dataset, true, true, true);
        PiePlot p =(PiePlot)chart.getPlot();
        //p.setForegroundAlpha(TOP_ALIGNMENT);
@@ -1030,7 +1030,7 @@ public class adminattendance extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_txtSearchActionPerformed
 
     private void btnSearch1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearch1MouseClicked
@@ -1192,7 +1192,7 @@ public class adminattendance extends javax.swing.JInternalFrame {
             double noofregdates = Integer.parseInt(jTable1.getValueAt(a, 2).toString());
             double absents = noofregdates-noofattendance;
             int ab = (int) absents;
-            System.out.println("Malinda");
+            
             jTable1.setValueAt(ab, a, 3);
             
             double precen = (noofattendance / noofregdates)*100.0;
@@ -1240,7 +1240,7 @@ public class adminattendance extends javax.swing.JInternalFrame {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Attendance", new Integer(attendance));
         dataset.setValue("Absents", new Integer(absents));
-        dataset.setValue("Register Date", new Integer(regdates));
+        //dataset.setValue("Register Date", new Integer(regdates));
         JFreeChart chart = ChartFactory.createPieChart("", dataset, true, true, true);
         PiePlot p = (PiePlot) chart.getPlot();
         //p.setForegroundAlpha(TOP_ALIGNMENT);
@@ -1366,8 +1366,7 @@ public class adminattendance extends javax.swing.JInternalFrame {
                 double noofattendance = Integer.parseInt(jTable3.getValueAt(a, 1).toString());
                 double noofregdates = Integer.parseInt(jTable3.getValueAt(a, 2).toString());
                 double absents = noofregdates - noofattendance;
-                int ab = (int) absents;
-                System.out.println("Malinda");
+                int ab = (int) absents;                
                 jTable3.setValueAt(ab, a, 3);
 
                 double precen = (noofattendance / noofregdates) * 100.0;
@@ -1416,7 +1415,7 @@ public class adminattendance extends javax.swing.JInternalFrame {
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Attendance", new Integer(attendance));
         dataset.setValue("Absents", new Integer(absents));
-        dataset.setValue("Register Date", new Integer(regdates));
+        //dataset.setValue("Register Date", new Integer(regdates));
         JFreeChart chart = ChartFactory.createPieChart("", dataset, true, true, true);
         PiePlot p = (PiePlot) chart.getPlot();
         //p.setForegroundAlpha(TOP_ALIGNMENT);

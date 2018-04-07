@@ -11,6 +11,7 @@ import OtherClassFiles.ClassAvgFind;
 import OtherClassFiles.ClassIDFind;
 import OtherClassFiles.MarksFind;
 import java.awt.BorderLayout;
+import java.awt.List;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -29,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -61,6 +64,11 @@ public class adminexamprof extends javax.swing.JInternalFrame {
     DecimalFormat df = new DecimalFormat("#.00");
     String user;
     DefaultListModel modell = new DefaultListModel();
+    ArrayList<Integer> subjectList = new ArrayList<Integer>();
+    ArrayList<Integer> SelectedList = new ArrayList<Integer>();
+    String examidd;
+    
+    
     //adminexamprof m1 = new adminexamprof();
     public adminexamprof(String user) throws SQLException {
         conn = DbConnect.ConnectDb();
@@ -74,7 +82,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
             
             Date date = new Date();
             int datee = Calendar.getInstance().get(Calendar.YEAR);
-            System.out.println(datee);
+            
             String sql = "SELECT class_id FROM classes WHERE teach_id='"+user+"' AND class_year='"+datee+"'";
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -135,13 +143,13 @@ public class adminexamprof extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl_student_list = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbl_marks = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -149,7 +157,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
         txt_year = new com.toedter.calendar.JYearChooser();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txt_grade = new javax.swing.JComboBox<>();
+        combo_gradeAddExam = new javax.swing.JComboBox<>();
         txt_term = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -160,7 +168,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btn_add_exam = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -620,7 +628,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_student_list.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -682,7 +690,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tbl_student_list);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -718,7 +726,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_marks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"", null},
                 {"", null},
@@ -744,7 +752,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable3);
+        jScrollPane4.setViewportView(tbl_marks);
 
         jButton2.setText("Insert");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -820,7 +828,12 @@ public class adminexamprof extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Term :");
 
-        txt_grade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" }));
+        combo_gradeAddExam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11" }));
+        combo_gradeAddExam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_gradeAddExamActionPerformed(evt);
+            }
+        });
 
         txt_term.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", " " }));
         txt_term.addActionListener(new java.awt.event.ActionListener() {
@@ -843,7 +856,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                         .addGroup(jPanel12Layout.createSequentialGroup()
                             .addComponent(jLabel10)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txt_grade, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(combo_gradeAddExam, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel12Layout.createSequentialGroup()
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -868,7 +881,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txt_grade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_gradeAddExam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_term, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -880,11 +893,6 @@ public class adminexamprof extends javax.swing.JInternalFrame {
 
         jScrollPane5.setViewportView(selected_list);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Sinhala", "Mathamatics ", "English", "Tamil", "Environmental studies ", "Buddhist " };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane6.setViewportView(jList2);
 
         jButton3.setText("Insert");
@@ -946,7 +954,12 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                     .addGap(21, 21, 21)))
         );
 
-        jButton5.setText("Submit");
+        btn_add_exam.setText("Submit");
+        btn_add_exam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add_examActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -961,7 +974,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(537, 537, 537)
-                        .addComponent(jButton5)))
+                        .addComponent(btn_add_exam)))
                 .addContainerGap(182, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
@@ -972,7 +985,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                     .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(jButton5)
+                .addComponent(btn_add_exam)
                 .addContainerGap(184, Short.MAX_VALUE))
         );
 
@@ -1049,7 +1062,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
             pst.setInt(1, classi);
             rs = pst.executeQuery();
             
-            jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+            tbl_student_list.setModel(DbUtils.resultSetToTableModel(rs));
             
             
         } catch (SQLException ex) {
@@ -1059,7 +1072,10 @@ public class adminexamprof extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        jTable3.setModel(new DefaultTableModel());
+        tbl_marks.setVisible(true);
+        tbl_marks.enable();
+        //tbl_marks.removeAll();
+        tbl_marks.setModel(new DefaultTableModel());
         int term = Integer.parseInt(jComboBox1.getSelectedItem().toString());
         int classid = Integer.parseInt(jTextField1.getText().toString().trim());       
         String sql = "SELECT class_year, class_grade FROM classes WHERE class_id=?";
@@ -1071,9 +1087,9 @@ public class adminexamprof extends javax.swing.JInternalFrame {
             if(rs.next()){
                 String class_year = rs.getString("class_year");
                 String class_grade = rs.getString("class_grade");
-                int r = jTable2.getSelectedRow();
-                String studentid = jTable2.getValueAt(r, 0).toString().trim();
-                System.out.println(studentid);
+                int r = tbl_student_list.getSelectedRow();
+                String studentid = tbl_student_list.getValueAt(r, 0).toString().trim();
+                
                 String sqll = "SELECT exam_id FROM exams WHERE exam_year=? AND exam_grade=? AND exam_term=?";
                 pst = conn.prepareStatement(sqll);
                 pst.setInt(1, Integer.parseInt(class_year));
@@ -1081,7 +1097,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                 pst.setInt(3, term);
                 rs = pst.executeQuery();
                 if(rs.next()){
-                    String examidd = rs.getString("exam_id");
+                   /* String examidd = rs.getString("exam_id");
                     System.out.println(examidd);
                     String sqlll = "SELECT S.subject_id,S.subject_name,S.subject_grade, B.Marks\n" +
                                         "FROM exam_subject E, subjects S, student_exam B\n" +
@@ -1090,43 +1106,95 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                     pst = conn.prepareStatement(sqlll);
                     pst.setInt(1, Integer.parseInt(examidd));
                     pst.setInt(2, Integer.parseInt(studentid));
+                    rs = pst.executeQuery();*/
+                    
+                    examidd = rs.getString("exam_id");
+                    
+                    String sqlll = "SELECT S.subject_id,S.subject_name FROM exam_subject E,subjects S WHERE E.examid='"+examidd+"' AND E.subjectid = S.subject_id ";
+                    
+                    pst = conn.prepareStatement(sqlll);
+                    
+                    rs = pst.executeQuery();
+                   
+                    DefaultTableModel model = new DefaultTableModel(new String[]{"Subject ID", "Subject Name", "Marks"}, 0);                  
+                    while(rs.next()){
+{
+                        String d = rs.getString("S.subject_id");
+                        String e = rs.getString("S.subject_name");
+                        String f = "";
+                    model.addRow(new Object[]{d, e, f});
+}                   }
+                    tbl_marks.setModel(model);  
+                    
+                    int selectedRow = tbl_student_list.getSelectedRow();
+                    String student_id = tbl_student_list.getValueAt(selectedRow, 0).toString();
+                    
+                    String getEx = "SELECT * FROM student_exam S WHERE S.exam_id = '"+examidd+"' AND S.student_id = '"+student_id+"'";
+                    
+                    pst = conn.prepareStatement(getEx);                    
                     rs = pst.executeQuery();
                     
-                    jTable3.setModel(DbUtils.resultSetToTableModel(rs));
+                    int rowcount =tbl_marks.getRowCount();
+                   
+                    if(rs.next()){
+                        
+                        while(rs.next()){
+                            String subjectidFroDB = rs.getString("S.subject_id");
+                            for(int i = 0; i< rowcount;i++){
+                                
+                                if(tbl_marks.getValueAt(i, 0).equals(subjectidFroDB)){
+                                    tbl_marks.setValueAt(rs.getString("S.Marks"), i, 2);                                   
+                                    break;
+                                    
+                                }
+                                
+                            }
+                           
+                        
+                        }
+                        
+                        JOptionPane.showMessageDialog(rootPane, "Marks has been added to the system");
+                        tbl_marks.disable();
+                        //tbl_marks.setModel(DbUtils.resultSetToTableModel(rs));
+                    
+                    }
+                    else{
+                    tbl_marks.removeAll();
+                    }
+                    
+                    
+                    
+                    
                 }
-                
-                
-                
-            
-            
             }
         } catch (SQLException ex) {
             Logger.getLogger(adminexamprof.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       int r = jTable2.getSelectedRow();
-       String studentad = jTable2.getValueAt(r, 0).toString();
+       int r = tbl_student_list.getSelectedRow();
+       String studentad = tbl_student_list.getValueAt(r, 0).toString();
        int subid=0;
        float marks=0;
        String sql;
-       int rowcount = jTable3.getRowCount();
+       int rowcount = tbl_marks.getRowCount();
         
         try {
             for (int i = 0; i < rowcount; i++) {
                
-               subid = Integer.parseInt(jTable3.getValueAt(i, 0).toString());
-               marks = Float.parseFloat(jTable3.getValueAt(i, 2).toString());
-               
-               System.out.println(i+" "+subid+" :"+marks);
+               subid = Integer.parseInt(tbl_marks.getValueAt(i, 0).toString());
+               marks = Float.parseFloat(tbl_marks.getValueAt(i, 2).toString());
                
                
-               sql = "INSERT INTO student_exam (student_id,exam_id,subject_id,Marks) VALUES ('"+studentad+"','"+examid+"','"+subid+"','"+marks+"')";
+               
+               
+             sql = "INSERT INTO student_exam (student_id,exam_id,subject_id,Marks) VALUES ('"+studentad+"','"+examidd+"','"+subid+"','"+marks+"')";
                pst = conn.prepareStatement(sql);
                pst.execute();
-               jTable3.setVisible(false);
-               jTable2.changeSelection(i, 0, false, false);
+               tbl_marks.setVisible(false);
+               tbl_student_list.changeSelection(i, 0, false, false);
                
                 String sqll = "SELECT P.AdNo,P.FullName\n"
                         + "FROM student_personal_details P,student_class C, student_exam E\n"
@@ -1137,12 +1205,13 @@ public class adminexamprof extends javax.swing.JInternalFrame {
     
             pst = conn.prepareStatement(sqll);
             rs = pst.executeQuery();
-            jTable2.setModel(DbUtils.resultSetToTableModel(rs));
+            //tbl_student_list.setModel(DbUtils.resultSetToTableModel(rs));
                
                
             }
         } catch (NumberFormatException e) {
                JOptionPane.showMessageDialog(rootPane, "PLease enter marks for all Subjects");
+               
         } catch (SQLException ex) {
             Logger.getLogger(adminexamprof.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1312,7 +1381,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
                content.drawString   ("SID       Subject           Marks             Class Avg");
                content.endText();
 
-                int y = 460;
+               int y = 460;
                for (int i = 0; i < rowcount; i++) {
 
                    subjectid = table_marks.getValueAt(i, 0).toString().trim();
@@ -1380,12 +1449,12 @@ public class adminexamprof extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_print_reportActionPerformed
 
     private void txt_termActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_termActionPerformed
-       
-        DefaultListModel model = new DefaultListModel();
-        selected_list.setModel(model);
+        /*
+       DefaultListModel model = new DefaultListModel();
+       selected_list.setModel(model);
        int year =txt_year.getYear();
        String strYear = Integer.toString(year);
-       String gradee = txt_grade.getSelectedItem().toString().trim();
+       String gradee = combo_gradeAddExam.getSelectedItem().toString().trim();
        String term = txt_term.getSelectedItem().toString().trim();
        
        
@@ -1424,7 +1493,7 @@ public class adminexamprof extends javax.swing.JInternalFrame {
        
        
        
-       
+       */
        
     }//GEN-LAST:event_txt_termActionPerformed
 
@@ -1437,7 +1506,104 @@ public class adminexamprof extends javax.swing.JInternalFrame {
         
         
         
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btn_add_examActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_examActionPerformed
+        
+        int examID = 0;
+        for (int i = 0; i < selected_list.getModel().getSize(); i++) {
+            
+            final int result = Integer.parseInt(stripNonDigits(selected_list.getModel().getElementAt(i)).trim());
+            SelectedList.add(result);         
+        }
+        
+        
+        /*
+        for (Integer dataHolder : SelectedList) {
+            System.out.println(dataHolder);
+        }
+        */
+        
+        int grade = Integer.parseInt(combo_gradeAddExam.getSelectedItem().toString().trim());
+        int term = Integer.parseInt(txt_term.getSelectedItem().toString().trim());
+        int year = txt_year.getYear();
+        
+        /**
+         * Insert New Exam
+         */
+        String newExam = "INSERT INTO exams(exam_year,exam_term,exam_grade) VALUES ('"+year+"','"+term+"','"+grade+"')";
+        try {
+            pst = conn.prepareStatement(newExam);
+            pst.execute();
+            JOptionPane.showMessageDialog(rootPane, "Successfully Added to the database..!!!");
+        } catch (SQLException ex) {
+            Logger.getLogger(adminexamprof.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /**
+         * Get the created examID
+         */
+        String GetExamID = "SELECT exam_id FROM exams WHERE exam_year='"+year+"' AND exam_grade='"+grade+"' AND exam_term='"+term+"' ";
+        try {
+            pst = conn.prepareStatement(GetExamID);
+            rs = pst.executeQuery();
+            if(rs.next()){
+                examID = Integer.parseInt(rs.getString("exam_id"));
+                JOptionPane.showConfirmDialog(rootPane, examID);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(adminexamprof.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /**
+         * Insert Exam subjects 
+         */
+        for (Integer dataHolder : SelectedList) {
+            String insertSubject = "INSERT INTO exam_subject (examid,subjectid) VALUES ('"+examID+"','"+dataHolder+"')";
+            try {
+                //System.out.println(dataHolder);
+                pst = conn.prepareStatement(insertSubject);
+                pst.execute();
+            } catch (SQLException ex) {
+                Logger.getLogger(adminexamprof.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btn_add_examActionPerformed
+
+    private void combo_gradeAddExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_gradeAddExamActionPerformed
+        String grade = combo_gradeAddExam.getSelectedItem().toString();
+        int subjectCount=0;
+        DefaultListModel model2 = new DefaultListModel();
+        String sql = "SELECT * FROM subjects WHERE subject_grade='"+grade+"'";
+        try {
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()){             
+                subjectList.add(Integer.parseInt(rs.getString("subject_id")));
+                model2.addElement(rs.getString("subject_id")+" "+rs.getString("subject_name"));
+            }
+            
+            jList2.setModel(model2);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(adminexamprof.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_combo_gradeAddExamActionPerformed
 
     
     public void addTblCol(JTable table, String name) {
@@ -1449,18 +1615,32 @@ public class adminexamprof extends javax.swing.JInternalFrame {
         model.addColumn(name);
 
     }
+    
+    public static String stripNonDigits(
+            final CharSequence input /* inspired by seh's comment */){
+    final StringBuilder sb = new StringBuilder(
+            input.length() /* also inspired by seh's comment */);
+    for(int i = 0; i < input.length(); i++){
+        final char c = input.charAt(i);
+        if(c > 47 && c < 58){
+            sb.append(c);
+        }
+    }
+    return sb.toString();
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_add_exam;
     private javax.swing.JButton btn_print_report;
     private javax.swing.JButton btn_submit;
     private javax.swing.JComboBox<String> combo_grade;
+    private javax.swing.JComboBox<String> combo_gradeAddExam;
     private javax.swing.JComboBox<String> combo_subclass;
     private javax.swing.JComboBox<String> combo_term;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -1500,8 +1680,6 @@ public class adminexamprof extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -1509,9 +1687,10 @@ public class adminexamprof extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlChart;
     private javax.swing.JList<String> selected_list;
     private javax.swing.JTable table_marks;
+    private javax.swing.JTable tbl_marks;
+    private javax.swing.JTable tbl_student_list;
     private javax.swing.JTable tbl_studentlist;
     private javax.swing.JTextField txt_avg;
-    private javax.swing.JComboBox<String> txt_grade;
     private javax.swing.JComboBox<String> txt_term;
     private javax.swing.JTextField txt_totalmarks;
     private com.toedter.calendar.JYearChooser txt_year;
